@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://aiworktools.github.io/ai-tools-nav/sitemap.xml
+
+# 禁止爬虫访问敏感目录
+Disallow: /admin/
+Disallow: /api/
+Disallow: /private/

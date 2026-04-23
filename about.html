@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>关于我们 - AI办公效率工具箱</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .about-page {
+            background: #f5f7fa;
+            min-height: 100vh;
+        }
+        
+        .page-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 50px 0;
+            text-align: center;
+        }
+        
+        .page-header h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .about-section {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .about-section h2 {
+            font-size: 1.3rem;
+            color: #333;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #667eea;
+        }
+        
+        .about-section p {
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+        
+        .about-section p:last-child {
+            margin-bottom: 0;
+        }
+        
+        .question-list {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+        
+        .question-list li {
+            padding: 10px 0 10px 30px;
+            position: relative;
+            color: #555;
+            font-size: 1.05rem;
+        }
+        
+        .question-list li::before {
+            content: "❓";
+            position: absolute;
+            left: 0;
+        }
+        
+        .principle-list {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+        
+        .principle-list li {
+            padding: 12px 0 12px 35px;
+            position: relative;
+            color: #555;
+            line-height: 1.6;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .principle-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .principle-list li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            width: 24px;
+            height: 24px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            border-radius: 0 12px 12px 0;
+            margin: 20px 0;
+        }
+        
+        .highlight-box p {
+            margin: 0;
+            font-size: 1.1rem;
+            color: #333;
+        }
+        
+        .contact-box {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 25px;
+            text-align: center;
+        }
+        
+        .contact-box p {
+            margin-bottom: 15px;
+        }
+        
+        .email-link {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .email-link:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            color: #667eea;
+            text-decoration: none;
+            margin-bottom: 30px;
+            font-weight: 500;
+        }
+        
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        
+        .signature {
+            text-align: right;
+            color: #666;
+            font-style: italic;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body class="about-page">
+    <!-- 头部 -->
+    <header class="page-header">
+        <div class="container">
+            <h1>关于我们</h1>
+            <p>帮打工人找到真正好用的AI工具</p>
+        </div>
+    </header>
+
+    <!-- 内容 -->
+    <main class="about-content">
+        <a href="index.html" class="back-link">← 返回首页</a>
+        
+        <!-- 我是谁 -->
+        <div class="about-section">
+            <h2>我是谁</h2>
+            <p>一个被周报、PPT、会议纪要折磨过的打工人。</p>
+        </div>
+        
+        <!-- 为什么做这个网站 -->
+        <div class="about-section">
+            <h2>为什么做这个网站</h2>
+            <p>2024年，AI工具爆发式增长。每天都有新产品冒出来，号称能"提升10倍效率"。但问题是——</p>
+            <ul class="question-list">
+                <li>哪些真的好用？</li>
+                <li>哪些只是噱头？</li>
+                <li>哪些国内能直接访问？</li>
+            </ul>
+            <p>我花了几个月时间，一个个试过来。踩过坑，也挖到宝。这个网站，就是我的"避坑指南+宝藏地图"。</p>
+        </div>
+        
+        <!-- 我们的原则 -->
+        <div class="about-section">
+            <h2>我们的原则</h2>
+            <ul class="principle-list">
+                <li><strong>敢说缺点：</strong>好用就是好用，不好用也会直说</li>
+                <li><strong>场景导向：</strong>不只是列工具，更告诉你什么时候用、怎么用</li>
+            </ul>
+        </div>
+        
+        <!-- 更新频率 -->
+        <div class="about-section">
+            <h2>更新频率</h2>
+            <p>每周更新，保持内容新鲜。如果发现工具失效或信息过时，欢迎告诉我。</p>
+        </div>
+        
+        <!-- 最后 -->
+        <div class="about-section">
+            <h2>最后</h2>
+            <div class="highlight-box">
+                <p>AI不会取代打工人，但会用AI的打工人会取代不会用的。</p>
+            </div>
+            <p>希望这个网站，能帮你早点下班。</p>
+        </div>
+        
+        <!-- 联系我们 -->
+        <div class="about-section">
+            <h2>联系我们</h2>
+            <div class="contact-box">
+                <p>若你有任何意见和建议，无论是网站排版改进、AI工具提交，还是文章投稿、观点分享和商务合作，欢迎随时联系站长。</p>
+                <a href="mailto:aitoolswork2026@163.com" class="email-link">📧 aitoolswork2026@163.com</a>
+            </div>
+        </div>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-brand">
+                <div class="footer-logo">
+                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="50" cy="50" r="45" fill="none" stroke="white" stroke-width="3" opacity="0.9"/>
+                        <path d="M55 15 L35 45 L50 45 L45 85 L65 50 L50 50 Z" fill="white"/>
+                        <circle cx="20" cy="30" r="3" fill="white" opacity="0.6"/>
+                        <circle cx="80" cy="25" r="2" fill="white" opacity="0.5"/>
+                        <circle cx="75" cy="70" r="2.5" fill="white" opacity="0.4"/>
+                    </svg>
+                </div>
+                <span class="footer-brand-text">AI工具箱</span>
+            </div>
+            <p class="footer-note">所有工具均亲测，国内可直接使用</p>
+            <p class="footer-links">
+                <a href="disclaimer.html">免责声明</a>
+                <span>|</span>
+                <a href="scenarios.html">场景专题</a>
+                <span>|</span>
+                <a href="about.html">关于我们</a>
+            </p>
+        </div>
+    </footer>
+</body>
+</html>

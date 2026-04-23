@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI办公效率工具箱 - 60+款亲测好用的AI工具推荐</title>
+    <meta name="description" content="帮打工人找到真正好用的AI工具。精选60+款AI办公工具，涵盖文档写作、PPT演示、会议纪要、数据处理等场景，全部亲测可用，国内直接访问。">
+    <meta name="keywords" content="AI办公工具,AI效率工具,AI工具推荐,办公AI软件,打工人必备AI工具,国内AI工具,免费AI工具">
+    <meta name="author" content="AI办公效率工具箱">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="AI办公效率工具箱 - 60+款亲测好用的AI工具推荐">
+    <meta property="og:description" content="帮打工人找到真正好用的AI工具。精选60+款AI办公工具，全部亲测可用，国内直接访问。">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://aiworktools.github.io/ai-tools-nav">
+    <meta property="og:image" content="https://aiworktools.github.io/ai-tools-nav/og-image.png">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="AI办公效率工具箱 - 60+款亲测好用的AI工具推荐">
+    <meta name="twitter:description" content="帮打工人找到真正好用的AI工具。精选60+款AI办公工具，全部亲测可用。">
+    
+    <!-- Canonical -->
+    <link rel="canonical" href="https://aiworktools.github.io/ai-tools-nav">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%234f46e5'/><path d='M55 15 L35 45 L50 45 L45 85 L65 50 L50 50 Z' fill='white'/></svg>">
+    
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "AI办公效率工具箱",
+        "description": "帮打工人找到真正好用的AI工具",
+        "url": "https://aiworktools.github.io/ai-tools-nav",
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://aiworktools.github.io/ai-tools-nav/?search={search_term_string}",
+            "query-input": "required name=search_term_string"
+        }
+    }
+    </script>
+    
+    <!-- Baidu Analytics -->
+    <script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?2db8f7ef4117f63695c6c9f3c69e8004";
+        var s = document.getElementsByTagName("script")[0]; 
+        s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
+</head>
+<body>
+    <!-- 头部 -->
+    <header class="header">
+        <div class="container">
+            <div class="logo-section">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-label="AI工具箱Logo">
+                        <circle cx="50" cy="50" r="45" fill="none" stroke="white" stroke-width="3" opacity="0.9"/>
+                        <path d="M55 15 L35 45 L50 45 L45 85 L65 50 L50 50 Z" fill="white"/>
+                        <circle cx="20" cy="30" r="3" fill="white" opacity="0.6"/>
+                        <circle cx="80" cy="25" r="2" fill="white" opacity="0.5"/>
+                        <circle cx="75" cy="70" r="2.5" fill="white" opacity="0.4"/>
+                    </svg>
+                </div>
+                <div class="logo-text-group">
+                    <h1 class="logo-text">AI办公效率工具箱</h1>
+                    <p class="logo-subtitle">已收录 <strong id="tools-count">60</strong>+ 款亲测工具</p>
+                </div>
+            </div>
+            <p class="slogan">帮打工人找到真正好用的AI工具</p>
+            <div class="header-features">
+                <span class="feature-tag">✅ 全部亲测</span>
+                <span class="feature-tag">🇨🇳 国内可用</span>
+                <span class="feature-tag">🎯 场景化推荐</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主导航 -->
+    <nav class="main-nav" aria-label="主导航">
+        <div class="container">
+            <a href="index.html" class="nav-link active">工具大全</a>
+            <a href="scenarios.html" class="nav-link">场景专题</a>
+            <a href="about.html" class="nav-link">关于我们</a>
+        </div>
+    </nav>
+
+    <!-- 搜索栏 -->
+    <section class="search-section">
+        <div class="container">
+            <div class="search-box">
+                <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"/>
+                    <path d="m21 21-4.35-4.35"/>
+                </svg>
+                <input type="text" id="search-input" placeholder="搜索工具名称、功能、使用场景..." aria-label="搜索工具">
+                <button id="search-clear" class="search-clear" aria-label="清除搜索">×</button>
+            </div>
+            <div class="search-stats" id="search-stats"></div>
+        </div>
+    </section>
+
+    <!-- 分类导航 -->
+    <nav class="category-nav" aria-label="分类筛选">
+        <div class="container">
+            <div class="category-scroll">
+                <button class="category-btn active" data-category="all">🔥 全部</button>
+                <button class="category-btn" data-category="meeting">🗓️ 会议日程</button>
+                <button class="category-btn" data-category="writing">✍️ 文档写作</button>
+                <button class="category-btn" data-category="ppt">📊 PPT演示</button>
+                <button class="category-btn" data-category="email">📧 邮件沟通</button>
+                <button class="category-btn" data-category="data">📈 数据处理</button>
+                <button class="category-btn" data-category="notes">📝 知识管理</button>
+                <button class="category-btn" data-category="product">🎨 产品设计</button>
+                <button class="category-btn" data-category="video">🎬 视频剪辑</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 主内容区 -->
+    <main class="main">
+        <div class="container">
+            <!-- 筛选标签 -->
+            <div class="filter-tags" id="filter-tags">
+                <span class="filter-label">快速筛选：</span>
+                <button class="filter-tag" data-filter="free">🆓 免费</button>
+                <button class="filter-tag" data-filter="high-rated">⭐ 4.5分以上</button>
+                <button class="filter-tag" data-filter="domestic">🇨🇳 国产</button>
+                <button class="filter-tag" data-filter="nocode">🔰 零代码</button>
+            </div>
+            
+            <!-- 工具列表 -->
+            <div class="tools-grid" id="tools-grid" role="list">
+                <!-- 工具卡片由JS动态生成 -->
+            </div>
+            
+            <!-- 空状态 -->
+            <div class="empty-state" id="empty-state" style="display: none;">
+                <div class="empty-icon">🔍</div>
+                <h3>没有找到匹配的工具</h3>
+                <p>试试其他关键词或分类</p>
+                <button class="btn-primary" onclick="clearFilters()">清除筛选</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- 工具详情弹窗 -->
+    <div class="modal" id="tool-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <div class="modal-content">
+            <button class="modal-close" aria-label="关闭弹窗">&times;</button>
+            <div class="modal-body" id="modal-body">
+                <!-- 详情内容由JS填充 -->
+            </div>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-main">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="50" cy="50" r="45" fill="none" stroke="white" stroke-width="3" opacity="0.9"/>
+                            <path d="M55 15 L35 45 L50 45 L45 85 L65 50 L50 50 Z" fill="white"/>
+                        </svg>
+                    </div>
+                    <div class="footer-brand-text">
+                        <span class="footer-brand-name">AI工具箱</span>
+                        <span class="footer-brand-slogan">帮打工人提效</span>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <a href="about.html">关于我们</a>
+                    <a href="scenarios.html">场景专题</a>
+                    <a href="disclaimer.html">免责声明</a>
+                </div>
+            </div>
+            <p class="footer-note">所有工具均亲测，国内可直接使用 | 持续更新中</p>
+            <p class="footer-copyright">© 2025 AI办公效率工具箱. 保留所有权利.</p>
+        </div>
+    </footer>
+
+    <!-- 回到顶部 -->
+    <button id="back-to-top" class="back-to-top" aria-label="回到顶部">↑</button>
+
+    <script src="tools-data.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

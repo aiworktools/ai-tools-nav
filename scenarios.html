@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>场景专题 - AI办公效率工具箱</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .scenarios-page {
+            background: #f5f7fa;
+            min-height: 100vh;
+        }
+        
+        .page-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 50px 0;
+            text-align: center;
+        }
+        
+        .page-header h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        
+        .page-header p {
+            opacity: 0.9;
+        }
+        
+        /* 场景分类导航 */
+        .scenario-nav {
+            background: white;
+            padding: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .scenario-nav .container {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding-bottom: 5px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .scenario-nav-btn {
+            background: #f5f7fa;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .scenario-nav-btn:hover {
+            background: #e8ecf1;
+        }
+        
+        .scenario-nav-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .scenarios-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .scenario-category-section {
+            margin-bottom: 50px;
+        }
+        
+        .category-title {
+            font-size: 1.5rem;
+            color: #333;
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .scenario-card {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .scenario-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        .scenario-icon {
+            font-size: 2.5rem;
+        }
+        
+        .scenario-title h2 {
+            font-size: 1.4rem;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        
+        .scenario-title p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+        
+        .scenario-tags {
+            display: flex;
+            gap: 8px;
+            margin-top: 8px;
+        }
+        
+        .scenario-tag {
+            background: #f0f0f0;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            color: #666;
+        }
+        
+        .scenario-flow {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .flow-step {
+            display: flex;
+            gap: 15px;
+            align-items: flex-start;
+        }
+        
+        .step-number {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+        
+        .step-content {
+            flex: 1;
+            background: #f8f9fa;
+            padding: 15px 20px;
+            border-radius: 10px;
+        }
+        
+        .step-content h4 {
+            font-size: 1rem;
+            margin-bottom: 8px;
+            color: #333;
+        }
+        
+        .step-content p {
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+        
+        .tool-tag {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            margin-top: 8px;
+        }
+        
+        .scenario-result {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 15px 20px;
+            border-radius: 0 10px 10px 0;
+            margin-top: 20px;
+        }
+        
+        .scenario-result h4 {
+            color: #2e7d32;
+            margin-bottom: 5px;
+        }
+        
+        .scenario-result p {
+            color: #555;
+            font-size: 0.95rem;
+        }
+        
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            color: #667eea;
+            text-decoration: none;
+            margin-bottom: 30px;
+            font-weight: 500;
+        }
+        
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            .scenario-nav .container {
+                justify-content: flex-start;
+                flex-wrap: nowrap;
+            }
+        }
+    </style>
+</head>
+<body class="scenarios-page">
+    <!-- 头部 -->
+    <header class="page-header">
+        <div class="container">
+            <h1>🎯 场景专题</h1>
+            <p>帮打工人找到真正好用的AI工具</p>
+        </div>
+    </header>
+
+    <!-- 场景分类导航 -->
+    <nav class="scenario-nav">
+        <div class="container">
+            <button class="scenario-nav-btn active" data-category="all">📋 全部场景</button>
+            <button class="scenario-nav-btn" data-category="doc">📝 文档写作</button>
+            <button class="scenario-nav-btn" data-category="ppt">📊 PPT演示</button>
+            <button class="scenario-nav-btn" data-category="meeting">🎙️ 会议记录</button>
+            <button class="scenario-nav-btn" data-category="data">📈 数据处理</button>
+            <button class="scenario-nav-btn" data-category="comm">📧 沟通协作</button>
+        </div>
+    </nav>
+
+    <!-- 内容 -->
+    <main class="scenarios-content">
+        <a href="index.html" class="back-link">← 返回首页</a>
+        
+        <!-- 全部场景容器 -->
+        <div id="all-scenarios">
+            
+            <!-- 文档写作类 -->
+            <div class="scenario-category-section" data-category="doc">
+                <h2 class="category-title">📝 文档写作类</h2>
+                
+                <!-- 场景1：写周报 -->
+                <div class="scenario-card">
+                    <div class="scenario-header">
+                        <div class="scenario-icon">📊</div>
+                        <div class="scenario-title">
+                            <h2>10分钟写完周报</h2>
+                            <p>告别周日晚上赶周报的焦虑</p>
+                            <div class="scenario-tags">
+                                <span class="scenario-tag">文档写作</span>
+                                <span class="scenario-tag">效率提升</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="scenario-flow">
+                        <div class="flow-step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h4>收集一周工作内容</h4>
+                                <p>把本周的会议记录、工作文档、项目进度截图等素材整理到一个文件夹</p>
+                                <span class="tool-tag">手动整理</span>
+                            </div>
+                        </div>
+                        <div class="flow-step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h4>用Kimi一键总结</h4>
+                                <p>把所有素材打包上传Kimi，提示词："请帮我总结本周工作内容，按'已完成'、'进行中'、'下周计划'分类"</p>
+                                <span class="tool-tag">Kimi</span>
+                            </div>
+                        </div>
+                        <div class="flow-step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h4>用WPS排版美化</h4>
+                                <p>把Kimi生成的内容复制到WPS，用内置模板快速排版，添加公司Logo和格式</p>
+                                <span class="tool-tag">WPS AI</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="scenario-result">
+                        <h4>💡 效果</h4>
+                        <p>原本2小时的周报，现在10分钟搞定。Kimi帮你提炼重点，WPS帮你排版，你只需要审核和微调。</p>
+                    </div>
+                </div>
+
+                <!-- 场景6：写工作总结/述职报告 -->
+                <div class="scenario-card">
+                    <div class="scenario-header">
+                        <div class="scenario-icon">📋</div>
+                        <div class="scenario-title">
+                            <h2>30分钟搞定年终总结</h2>
+                            <p>从流水账到高分述职报告</p>
+                            <div class="scenario-tags">
+                                <span class="scenario-tag">文档写作</span>
+                                <span class="scenario-tag">职场晋升</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="scenario-flow">
+                        <div class="flow-step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h4>整理全年工作素材</h4>
+                                <p>收集全年的周报、项目文档、业绩数据、获奖证书等，按时间线排列</p>
+                                <span class="tool-tag">手动整理</span>
+                            </div>
+                        </div>
+                        <div class="flow-step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h4>Kimi提炼亮点</h4>
+                                <p>上传素材，提示词："请帮我提炼3-5个年度工作亮点，用STAR法则（情境-任务-行动-结果）描述，突出数据和成果"</p>
+                                <span class="tool-tag">Kimi</span>
+                            </div>
+                        </div>
+                        <div class="flow-step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h4>豆包优化表达</h4>
+                                <p>让豆包优化语言，提示词："请把这段总结改得更正式、更有高度，适合给领导看的述职报告风格"</p>
+                                <span class="tool-tag">豆包</span>
+                            </div>
+                        </div>
+                        <div class="flow-step">
+                            <div class="step-number">4</div>
+                            <div class="step-content">
+                                <h4>WPS生成精美文档</h4>
+                                <p>用WPS的述职报告模板，插入图表展示数据，导出PDF</p>
+                                <span class="tool-tag">WPS AI</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="scenario-result">
+                        <h4>💡 效果</h4>
+                        <p>从不知从何下笔到交出一份数据扎实、亮点突出的述职报告，让领导眼前一亮。</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PPT演示类 -->
+            <div class="scenario-category-section" data-category="ppt">
+                <h2 class="category-title">📊 PPT演示类</h2>
+                
+                <!-- 场景2：做PPT汇报 -->
+                <div class="scenario-card">
+                    <div class="scenario-header">
+                        <div class="scenario-icon">🎯</div>
+                        <div class="scenario-title">
+                            <h2>1小时搞定汇报PPT</h2>
+                            <p>从0到完整PPT的高效流程</p>
+                            <div class="scenario-tags">
+                                <span class="scenario-tag">PPT演示</span>
+                                <span class="scenario-tag">汇报神器</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="scenario-flow">
+                        <div class="flow-step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h4>用AI生成大纲</h4>
+                                <p>告诉Kimi或豆包你的汇报主题和要点，让它帮你生成完整的PPT大纲结构</p>
+                                <span class="tool-tag">Kimi / 豆包</span>
+                            </div>
+                        </div>
+                        <div class="flow-step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h4>AI生成初版PPT</h4>
+                                <p>把大纲复制到美图AI PPT或Gamma，一键生成完整PPT，选择商务风格</p>
+                                <span class="tool-tag">美图AI PPT / Gamma</span>
+                            </div>
+                        </div>
+                        <div class="flow-step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h4>iSlide美化细节</h4>
+                                <p>用iSlide统一字体配色，插入专业图表，替换低质量图片</p>
+                                <span class="tool-tag">iSlide AI</span>
+                            </div>
+                        </div>
+                        <div class="flow-step">
+                            <div class="step-number">4</div>
+                            <div class="step-content">
+                                <h4>通义听悟生成演讲稿</h4>
+                                <p>把PPT每页内容输入通义听悟，让它帮你生成对应的演讲话术</p>
+                                <span class="tool-tag">通义听悟</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="scenario-result">
+                        <h4>💡 效果</h4>
+                        <p>原本一天的工作量，现在1小时完成。AI帮你写内容、做设计，你只需把控方向和细节。</p>
+                    </div>
+                </div>
+
+                <!-- 场景7：产品发布会PPT -->
+                <div class="scenario-card">
+                    <div class="scenario-header">
+                        <div class="scenario-icon">🚀</div>
+                        <div class="scenario-title">
+                            <h2>半天搞定产品发布会PPT</h2>
+                            <p>从概念到高颜值发布会级别</p>
+                            <div class="scenario-tags">
+                                <span class="scenario-tag">PPT演示</span>
+                                <span class="scenario-tag">设计进阶</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="scenario-flow">
+                        <div class="flow-step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h4>Gamma生成视觉稿</h4>
+                                <p>输入产品核心卖点，选择"产品发布"主题，Gamma自动生成高颜值页面</p>
+                                <span class="tool-tag">Gamma</span>
+                            </div>
+                        </div>
+                        <div class="flow-step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h4>Kimi优化文案</h4>
+                                <p>把每页文字给Kimi，提示词："请把这段改成发布会演讲风格，简洁有力，每页不超过3句话"</p>
+                                <span class="tool-tag">Kimi</span>
+                            </div>
+                        </div>
+                        <div class="flow-step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h4>iSlide统一视觉</h4>
+                                <p>导入公司VI色，用iSlide的一键优化统一全文字体和配色</p>
+                                <span class="tool-tag">iSlide AI</span>
+                            </div>
+                        </div>
+                        <div class="flow-step">
+                            <div class="step-number">4</div>
+                            <div class="step-content">
+                                <h4>美图AI PPT补页</h4>
+                                <p>用美图AI补充过渡页、致谢页等，保持整体风格一致</p>
+                                <span class="tool-tag">美图AI PPT</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="scenario-result">
+                        <h4>💡 效果</h4>
+                        <p>半天做出发布会级别的PPT，设计感拉满，文案精炼有力，老板和客户都满意。</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 会议记录类 -->
+            <div class="scenario-category-section" data-category="meeting">
+                <h2 class="category-title">🎙️ 会议记录类</h2>
+                
+                <!-- 场景3：会议记录 -->
+                <div class="scenario-card">
+                    <div class="scenario-header">
+                        <div class="scenario-icon">🎙️</div>
+                        <div class="scenario-title">
+                            <h2>会议结束，纪要已出</h2>
+                            <p>全自动会议记录 workflow</p>
+                            <div class="scenario-tags">
+                                <span class="scenario-tag">会议记录</span>
+                                <span class="scenario-tag">自动化</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="scenario-flow">
+                        <div class="flow-step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h4>飞书妙记录音转文字</h4>
+                                <p>会议开始时打开飞书妙记录音，结束后自动生成文字稿和待办事项</p>
+                                <span class="tool-tag">飞书妙记</span>
+                            </div>
+                        </div>
+                        <div class="flow-step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h4>Kimi提炼重点</h4>
+                                <p>把会议文字稿上传Kimi，提示词："请提炼会议重点，按'决策事项'、'待办任务'、'责任人'整理"</p>
+                                <span class="tool-tag">Kimi</span>
+                            </div>
+                        </div>
+                        <div class="flow-step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h4>飞书文档同步</h4>
+                                <p>把整理好的纪要粘贴到飞书文档，@相关同事，设置待办提醒</p>
+                                <span class="tool-tag">飞书文档</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="scenario-result">
+                        <h4>💡 效果</h4>
+                        <p>会议结束5分钟，纪要已发全员。不再熬夜整理录音，不再遗漏重要决策。</p>
+                    </div>
+                </div>
+
+                <!-- 场景8：面试/客户访谈记录 -->
+                <div class="scenario-card">
+                    <div class="scenario-header">
+                        <div class="scenario-icon">🎤</div>
+                        <div class="scenario-title">
+                            <h2>访谈结束，洞察已出</h2>
+                            <p>用户访谈、客户沟通的深度分析</p>
+                            <div class="scenario-tags">
+                                <span class="scenario-tag">会议记录</span>
+                                <span class="scenario-tag">用户研究</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="scenario-flow">
+                        <div class="flow-step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h4>讯飞听见高精度录音</h4>
+                                <p>用讯飞听见录音，开启"访谈模式"，确保专业术语识别准确</p>
+                                <span class="tool-tag">讯飞听见</span>
+                            </div>
+                        </div>
+                        <div class="flow-step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h4>通义听悟提取洞察</h4>
+                                <p>上传录音，提示词："请提取用户的核心痛点、需求和建议，按主题分类整理"</p>
+                                <span class="tool-tag">通义听悟</span>
+                            </div>
+                        </div>
+                        <div class="flow-step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h4>Kimi生成洞察报告</h4>
+                                <p>把多个访谈记录一起给Kimi，提示词："请归纳共性需求和差异化需求，输出用户洞察报告"</p>
+                                <span class="tool-tag">Kimi</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="scenario-result">
+                        <h4>💡 效果</h4>
+                        <p>从原始录音到结构化洞察报告，节省80%整理时间，专注在分析和决策上。</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 数据处理类 -->
+            <div class="scenario-category-section" data-category="data">
+                <h2 class="category-title">📈 数据处理类</h2>
+                
+                <!-- 场景4：数据分析 -->
+                <div class="scenario-card">
+                    <div class="scenario-header">
+                        <div class="scenario-icon">📈</div>
+                        <div class="scenario-title">
+                            <h2>Excel小白也能做分析</h2>
+                            <p>不用学公式，对话搞定数据分析</p>
+                            <div class="scenario-tags">
+                                <span class="scenario-tag">数据处理</span>
+                                <span class="scenario-tag">零门槛</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="scenario-flow">
+                        <div class="flow-step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h4>整理数据表格</h4>
+                                <p>确保表头清晰，数据格式统一，删除空行空列</p>
+                                <span class="tool-tag">Excel基础整理</span>
+                            </div>
+                        </div>
+                        <div class="flow-step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h4>上传酷表ChatExcel</h4>
+                                <p>把表格上传到酷表，直接用自然语言提问，如"Q2哪个产品销售额增长最快"</p>
+                                <span class="tool-tag">酷表ChatExcel</span>
+                            </div>
+                        </div>
+                        <div class="flow-step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h4>Kimi写分析报告</h4>
+                                <p>把ChatExcel生成的图表和数据结论发给Kimi，让它写一段分析文字</p>
+                                <span class="tool-tag">Kimi</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="scenario-result">
+                        <h4>💡 效果</h4>
+                        <p>不用学VLOOKUP、数据透视表，用说话的方式完成数据分析。1小时的工作10分钟搞定。</p>
+                    </div>
+                </div>
+
+                <!-- 场景9：竞品分析报告 -->
+                <div class="scenario-card">
+                    <div class="scenario-header">
+                        <div class="scenario-icon">🔍</div>
+                        <div class="scenario-title">
+                            <h2>1天搞定竞品分析报告</h2>
+                            <p>从信息搜集到完整报告</p>
+                            <div class="scenario-tags">
+                                <span class="scenario-tag">数据处理</span>
+                                <span class="scenario-tag">市场研究</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="scenario-flow">
+                        <div class="flow-step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h4>文心一言搜集信息</h4>
+                                <p>开启联网搜索，提问："请搜集XX竞品2024年的产品动态、融资情况、用户评价"</p>
+                                <span class="tool-tag">文心一言</span>
+                            </div>
+                        </div>
+                        <div class="flow-step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h4>Kimi整理分析框架</h4>
+                                <p>把搜集的资料给Kimi，提示词："请按'产品功能、定价策略、优劣势、市场定位'整理竞品分析框架"</p>
+                                <span class="tool-tag">Kimi</span>
+                            </div>
+                        </div>
+                        <div class="flow-step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h4>ChatExcel做对比表</h4>
+                                <p>把竞品数据整理成表格，用ChatExcel生成对比分析图表</p>
+                                <span class="tool-tag">ChatExcel</span>
+                            </div>
+                        </div>
+                        <div class="flow-step">
+                            <div class="step-number">4</div>
+                            <div class="step-content">
+                                <h4>美图AI PPT生成报告</h4>
+                                <p>把分析内容导入美图AI PPT，选择"分析报告"模板，一键生成专业报告</p>
+                                <span class="tool-tag">美图AI PPT</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="scenario-result">
+                        <h4>💡 效果</h4>
+                        <p>原本一周的工作量压缩到1天，信息全面、分析深入、报告专业。</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 沟通协作类 -->
+            <div class="scenario-category-section" data-category="comm">
+                <h2 class="category-title">📧 沟通协作类</h2>
+                
+                <!-- 场景5：英文邮件 -->
+                <div class="scenario-card">
+                    <div class="scenario-header">
+                        <div class="scenario-icon">📧</div>
+                        <div class="scenario-title">
+                            <h2>专业英文邮件5分钟</h2>
+                            <p>从中文思路到地道英文</p>
+                            <div class="scenario-tags">
+                                <span class="scenario-tag">沟通协作</span>
+                                <span class="scenario-tag">英文写作</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="scenario-flow">
+                        <div class="flow-step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h4>用中文写邮件要点</h4>
+                                <p>先用中文把想表达的意思写出来，不用考虑英文语法</p>
+                                <span class="tool-tag">手动撰写</span>
+                            </div>
+                        </div>
+                        <div class="flow-step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h4>DeepL Write润色</h4>
+                                <p>把中文内容翻译成英文，粘贴到DeepL Write，选择'专业'风格一键优化</p>
+                                <span class="tool-tag">DeepL Write</span>
+                            </div>
+                        </div>
+                        <div class="flow-step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h4>豆包检查语气</h4>
+                                <p>把DeepL优化后的邮件给豆包，提示词："检查这封英文邮件的语气是否礼貌专业"</p>
+                                <span class="tool-tag">豆包</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="scenario-result">
+                        <h4>💡 效果</h4>
+                        <p>英文水平不够也能写出地道专业的商务邮件。DeepL保证语言质量，豆包把关文化细节。</p>
+                    </div>
+                </div>
+
+                <!-- 场景10：知识库搭建 -->
+                <div class="scenario-card">
+                    <div class="scenario-header">
+                        <div class="scenario-icon">📚</div>
+                        <div class="scenario-title">
+                            <h2>1周搭建团队知识库</h2>
+                            <p>从零散文档到系统化知识管理</p>
+                            <div class="scenario-tags">
+                                <span class="scenario-tag">沟通协作</span>
+                                <span class="scenario-tag">知识管理</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="scenario-flow">
+                        <div class="flow-step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h4>FlowUs搭建知识库框架</h4>
+                                <p>用FlowUs创建知识库，设置分类：产品文档、技术规范、运营手册、培训资料</p>
+                                <span class="tool-tag">FlowUs AI</span>
+                            </div>
+                        </div>
+                        <div class="flow-step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h4>Kimi整理历史文档</h4>
+                                <p>把散落在各处的历史文档给Kimi，让它提取关键信息，按新框架重新组织</p>
+                                <span class="tool-tag">Kimi</span>
+                            </div>
+                        </div>
+                        <div class="flow-step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h4>Notion AI生成模板</h4>
+                                <p>用Notion AI生成各类文档的标准模板：会议纪要、需求文档、复盘报告等</p>
+                                <span class="tool-tag">Notion AI</span>
+                            </div>
+                        </div>
+                        <div class="flow-step">
+                            <div class="step-number">4</div>
+                            <div class="step-content">
+                                <h4>印象笔记AI持续维护</h4>
+                                <p>设置印象笔记剪藏规则，新文章自动总结归档，保持知识库更新</p>
+                                <span class="tool-tag">印象笔记AI</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="scenario-result">
+                        <h4>💡 效果</h4>
+                        <p>从文档乱成麻到井井有条的知识库，团队新人上手快，老员工找资料省时间。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-brand">
+                <div class="footer-logo">
+                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="50" cy="50" r="45" fill="none" stroke="white" stroke-width="3" opacity="0.9"/>
+                        <path d="M55 15 L35 45 L50 45 L45 85 L65 50 L50 50 Z" fill="white"/>
+                        <circle cx="20" cy="30" r="3" fill="white" opacity="0.6"/>
+                        <circle cx="80" cy="25" r="2" fill="white" opacity="0.5"/>
+                        <circle cx="75" cy="70" r="2.5" fill="white" opacity="0.4"/>
+                    </svg>
+                </div>
+                <span class="footer-brand-text">AI工具箱</span>
+            </div>
+            <p class="footer-note">所有工具均亲测，国内可直接使用</p>
+            <p class="footer-links">
+                <a href="disclaimer.html">免责声明</a>
+                <span>|</span>
+                <a href="index.html">返回首页</a>
+                <span>|</span>
+                <a href="about.html">关于我们</a>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // 场景分类筛选
+        document.addEventListener('DOMContentLoaded', function() {
+            const navButtons = document.querySelectorAll('.scenario-nav-btn');
+            const sections = document.querySelectorAll('.scenario-category-section');
+            
+            navButtons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // 更新按钮状态
+                    navButtons.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    const category = this.dataset.category;
+                    
+                    if (category === 'all') {
+                        // 显示所有场景
+                        sections.forEach(section => {
+                            section.style.display = 'block';
+                        });
+                    } else {
+                        // 只显示对应分类
+                        sections.forEach(section => {
+                            if (section.dataset.category === category) {
+                                section.style.display = 'block';
+                            } else {
+                                section.style.display = 'none';
+                            }
+                        });
+                    }
+                    
+                    // 滚动到内容区
+                    document.querySelector('.scenarios-content').scrollIntoView({ behavior: 'smooth' });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
