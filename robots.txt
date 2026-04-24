@@ -1,7 +1,7 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://ai-box2026.github.io/ai-tools-nav/sitemap.xml
+Sitemap: https://www.aitools.ren/sitemap.xml
 
 # 禁止爬虫访问敏感目录
 Disallow: /admin/
