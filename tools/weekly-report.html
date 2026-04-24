@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI写周报生成器 - 一键生成专业周报 | AI办公效率工具箱</title>
+    <meta name="description" content="AI写周报生成器，输入本周工作内容，一键生成专业、有条理的周报。支持多种岗位模板，产品经理、运营、开发都能用。">
+    <meta name="keywords" content="周报生成器,AI写周报,周报模板,工作总结,AI办公工具">
+    <link rel="canonical" href="https://www.aitools.ren/tools/weekly-report.html">
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        .tool-page {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        .tool-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .tool-header h1 {
+            font-size: 2rem;
+            color: var(--gray-800);
+            margin-bottom: 12px;
+        }
+        .tool-header p {
+            color: var(--gray-600);
+            font-size: 1.1rem;
+        }
+        .input-section {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: 30px;
+            box-shadow: var(--shadow-md);
+            margin-bottom: 24px;
+        }
+        .input-group {
+            margin-bottom: 20px;
+        }
+        .input-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--gray-700);
+        }
+        .input-group input,
+        .input-group select,
+        .input-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid var(--gray-200);
+            border-radius: var(--radius);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+        .input-group input:focus,
+        .input-group select:focus,
+        .input-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        .input-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        .generate-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            border-radius: var(--radius);
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .generate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+        .result-section {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: 30px;
+            box-shadow: var(--shadow-md);
+            display: none;
+        }
+        .result-section.show {
+            display: block;
+        }
+        .result-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .result-header h3 {
+            color: var(--gray-800);
+        }
+        .copy-btn {
+            padding: 8px 16px;
+            background: var(--gray-100);
+            border: none;
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .copy-btn:hover {
+            background: var(--gray-200);
+        }
+        .result-content {
+            background: var(--gray-50);
+            padding: 20px;
+            border-radius: var(--radius);
+            white-space: pre-wrap;
+            line-height: 1.8;
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary);
+            text-decoration: none;
+            margin-bottom: 20px;
+        }
+        .tips-section {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            border-radius: var(--radius);
+            padding: 20px;
+            margin-top: 30px;
+        }
+        .tips-section h4 {
+            color: #92400e;
+            margin-bottom: 12px;
+        }
+        .tips-section ul {
+            color: #78350f;
+            padding-left: 20px;
+        }
+        .tips-section li {
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="tool-page">
+        <a href="../index.html" class="back-link">← 返回工具箱</a>
+        
+        <div class="tool-header">
+            <h1>📝 AI写周报生成器</h1>
+            <p>输入本周工作内容，一键生成专业周报</p>
+        </div>
+
+        <div class="input-section">
+            <div class="input-group">
+                <label for="job-title">岗位名称</label>
+                <input type="text" id="job-title" placeholder="如：产品经理、运营、开发工程师">
+            </div>
+            
+            <div class="input-group">
+                <label for="week-date">周报周期</label>
+                <input type="text" id="week-date" placeholder="如：2025年4月第4周">
+            </div>
+            
+            <div class="input-group">
+                <label for="work-content">本周工作内容（简单罗列）</label>
+                <textarea id="work-content" placeholder="例如：&#10;- 完成了XX功能的需求评审&#10;- 和开发对接了接口文档&#10;- 写了3篇产品文档&#10;- 参加了2次用户访谈"></textarea>
+            </div>
+            
+            <div class="input-group">
+                <label for="next-plan">下周计划（可选）</label>
+                <textarea id="next-plan" placeholder="例如：&#10;- 跟进XX功能开发进度&#10;- 准备下周的上线方案"></textarea>
+            </div>
+            
+            <button class="generate-btn" onclick="generateReport()">✨ 生成周报</button>
+        </div>
+
+        <div class="result-section" id="result-section">
+            <div class="result-header">
+                <h3>生成的周报</h3>
+                <button class="copy-btn" onclick="copyResult()">📋 复制</button>
+            </div>
+            <div class="result-content" id="result-content"></div>
+        </div>
+
+        <div class="tips-section">
+            <h4>💡 使用技巧</h4>
+            <ul>
+                <li>工作内容尽量具体，不要只写"开会"，要写"和XX团队讨论了XX方案"</li>
+                <li>有数据就写上，比如"用户增长10%"比"用户增长"更有说服力</li>
+                <li>遇到的问题也可以写，体现思考深度</li>
+                <li>生成后可以手动调整，让语气更符合你的风格</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        function generateReport() {
+            const jobTitle = document.getElementById('job-title').value || '员工';
+            const weekDate = document.getElementById('week-date').value || '本周';
+            const workContent = document.getElementById('work-content').value;
+            const nextPlan = document.getElementById('next-plan').value;
+            
+            if (!workContent.trim()) {
+                alert('请先填写本周工作内容');
+                return;
+            }
+            
+            // 解析工作内容
+            const works = workContent.split('\n').filter(w => w.trim()).map(w => w.replace(/^[-•]\s*/, ''));
+            
+            // 生成周报
+            let report = `${jobTitle}周报 - ${weekDate}\n\n`;
+            report += `一、本周工作总结\n\n`;
+            
+            works.forEach((work, index) => {
+                report += `${index + 1}. ${work}\n`;
+                // 添加一些扩展描述
+                if (work.includes('完成') || work.includes('上线')) {
+                    report += `   - 该任务已按计划完成，达到了预期目标\n`;
+                } else if (work.includes('讨论') || work.includes('会议')) {
+                    report += `   - 与相关方充分沟通，明确了后续方向\n`;
+                } else if (work.includes('文档') || work.includes('方案')) {
+                    report += `   - 输出物质量符合标准，已同步相关团队\n`;
+                } else {
+                    report += `   - 工作进展顺利，按计划推进中\n`;
+                }
+            });
+            
+            report += `\n二、工作亮点\n\n`;
+            report += `本周主要围绕${works[0] || '核心工作'}展开，整体推进顺利。`;
+            report += `在${works.length}项重点工作中，${works.filter(w => w.includes('完成')).length}项已完成，`;
+            report += `其余按计划推进。\n`;
+            
+            if (nextPlan.trim()) {
+                const plans = nextPlan.split('\n').filter(p => p.trim()).map(p => p.replace(/^[-•]\s*/, ''));
+                report += `\n三、下周工作计划\n\n`;
+                plans.forEach((plan, index) => {
+                    report += `${index + 1}. ${plan}\n`;
+                });
+            }
+            
+            report += `\n四、需要支持\n\n`;
+            report += `目前工作推进顺利，暂无特别需要支持的事项。如有需要会及时同步。\n`;
+            
+            document.getElementById('result-content').textContent = report;
+            document.getElementById('result-section').classList.add('show');
+            document.getElementById('result-section').scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        function copyResult() {
+            const content = document.getElementById('result-content').textContent;
+            navigator.clipboard.writeText(content).then(() => {
+                alert('已复制到剪贴板');
+            });
+        }
+    </script>
+</body>
+</html>

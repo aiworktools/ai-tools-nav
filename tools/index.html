@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI效率小工具 - 在线办公提效神器 | AI办公效率工具箱</title>
+    <meta name="description" content="免费在线AI效率小工具，包括周报生成器、会议纪要模板、PPT大纲生成器等，帮你快速完成日常办公任务，提升工作效率。">
+    <meta name="keywords" content="AI效率工具,在线工具,周报生成器,会议纪要模板,PPT大纲,办公神器">
+    <link rel="canonical" href="https://www.aitools.ren/tools/">
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        .tools-page {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        .page-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        .page-header h1 {
+            font-size: 2.2rem;
+            color: var(--gray-800);
+            margin-bottom: 12px;
+        }
+        .page-header p {
+            color: var(--gray-600);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .mini-tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+        }
+        .mini-tool-card {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: 30px;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+        }
+        .mini-tool-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-xl);
+        }
+        .mini-tool-icon {
+            font-size: 3rem;
+            margin-bottom: 16px;
+        }
+        .mini-tool-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--gray-800);
+            margin-bottom: 8px;
+        }
+        .mini-tool-desc {
+            color: var(--gray-600);
+            line-height: 1.6;
+            margin-bottom: 16px;
+            flex-grow: 1;
+        }
+        .mini-tool-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+        .mini-tool-feature {
+            background: var(--gray-100);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: var(--gray-600);
+        }
+        .mini-tool-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 12px 24px;
+            border-radius: var(--radius);
+            font-weight: 600;
+            transition: var(--transition);
+        }
+        .mini-tool-card:hover .mini-tool-btn {
+            transform: translateX(4px);
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary);
+            text-decoration: none;
+            margin-bottom: 30px;
+        }
+        .more-tools {
+            text-align: center;
+            margin-top: 50px;
+            padding: 40px;
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            border-radius: var(--radius-lg);
+        }
+        .more-tools h3 {
+            color: #92400e;
+            margin-bottom: 12px;
+        }
+        .more-tools p {
+            color: #78350f;
+            margin-bottom: 20px;
+        }
+        .more-tools-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #92400e;
+            color: white;
+            padding: 12px 24px;
+            border-radius: var(--radius);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+        .more-tools-btn:hover {
+            background: #78350f;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <div class="tools-page">
+        <a href="../index.html" class="back-link">← 返回工具箱首页</a>
+        
+        <div class="page-header">
+            <h1>⚡ AI效率小工具</h1>
+            <p>免费在线办公神器，输入内容一键生成，帮你省时提效</p>
+        </div>
+
+        <div class="mini-tools-grid">
+            <a href="weekly-report.html" class="mini-tool-card">
+                <div class="mini-tool-icon">📝</div>
+                <h3 class="mini-tool-name">AI写周报生成器</h3>
+                <p class="mini-tool-desc">输入本周工作内容，一键生成专业、有条理的周报。支持多种岗位模板，产品经理、运营、开发都能用。</p>
+                <div class="mini-tool-features">
+                    <span class="mini-tool-feature">多种岗位</span>
+                    <span class="mini-tool-feature">一键生成</span>
+                    <span class="mini-tool-feature">免费使用</span>
+                </div>
+                <span class="mini-tool-btn">立即使用 →</span>
+            </a>
+
+            <a href="meeting-minutes.html" class="mini-tool-card">
+                <div class="mini-tool-icon">📋</div>
+                <h3 class="mini-tool-name">会议纪要模板生成</h3>
+                <p class="mini-tool-desc">选择会议类型，一键生成专业会议纪要模板。支持周会、项目会、评审会、脑暴会等多种场景。</p>
+                <div class="mini-tool-features">
+                    <span class="mini-tool-feature">6种会议类型</span>
+                    <span class="mini-tool-feature">待办清单</span>
+                    <span class="mini-tool-feature">专业格式</span>
+                </div>
+                <span class="mini-tool-btn">立即使用 →</span>
+            </a>
+
+            <a href="ppt-outline.html" class="mini-tool-card">
+                <div class="mini-tool-icon">📊</div>
+                <h3 class="mini-tool-name">PPT大纲生成器</h3>
+                <p class="mini-tool-desc">输入主题和要点，一键生成专业PPT大纲结构。支持工作汇报、项目提案、产品介绍、路演融资等6大场景。</p>
+                <div class="mini-tool-features">
+                    <span class="mini-tool-feature">6大场景</span>
+                    <span class="mini-tool-feature">页数建议</span>
+                    <span class="mini-tool-feature">结构清晰</span>
+                </div>
+                <span class="mini-tool-btn">立即使用 →</span>
+            </a>
+        </div>
+
+        <div class="more-tools">
+            <h3>🚀 想要更多AI工具？</h3>
+            <p>我们精选了60+款亲测好用的AI办公工具，涵盖文档写作、PPT演示、会议纪要、数据处理等场景</p>
+            <a href="../index.html" class="more-tools-btn">查看全部工具 →</a>
+        </div>
+    </div>
+
+    <!-- Baidu Analytics -->
+    <script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?2db8f7ef4117f63695c6c9f3c69e8004";
+        var s = document.getElementsByTagName("script")[0]; 
+        s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
+</body>
+</html>

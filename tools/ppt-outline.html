@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PPT大纲生成器 - AI一键生成PPT结构 | AI办公效率工具箱</title>
+    <meta name="description" content="PPT大纲生成器，输入主题和要点，一键生成专业PPT大纲结构。支持工作汇报、项目提案、产品介绍等多种场景。">
+    <meta name="keywords" content="PPT大纲生成器,PPT结构,PPT模板,AI生成PPT,PPT大纲">
+    <link rel="canonical" href="https://www.aitools.ren/tools/ppt-outline.html">
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        .tool-page {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        .tool-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .tool-header h1 {
+            font-size: 2rem;
+            color: var(--gray-800);
+            margin-bottom: 12px;
+        }
+        .tool-header p {
+            color: var(--gray-600);
+            font-size: 1.1rem;
+        }
+        .input-section {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: 30px;
+            box-shadow: var(--shadow-md);
+            margin-bottom: 24px;
+        }
+        .input-group {
+            margin-bottom: 20px;
+        }
+        .input-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--gray-700);
+        }
+        .input-group input,
+        .input-group select,
+        .input-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid var(--gray-200);
+            border-radius: var(--radius);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+        .input-group input:focus,
+        .input-group select:focus,
+        .input-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        .input-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        .generate-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            border-radius: var(--radius);
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .generate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+        .result-section {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: 30px;
+            box-shadow: var(--shadow-md);
+            display: none;
+        }
+        .result-section.show {
+            display: block;
+        }
+        .result-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .result-header h3 {
+            color: var(--gray-800);
+        }
+        .copy-btn {
+            padding: 8px 16px;
+            background: var(--gray-100);
+            border: none;
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .copy-btn:hover {
+            background: var(--gray-200);
+        }
+        .result-content {
+            background: var(--gray-50);
+            padding: 20px;
+            border-radius: var(--radius);
+            white-space: pre-wrap;
+            line-height: 1.8;
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary);
+            text-decoration: none;
+            margin-bottom: 20px;
+        }
+        .tips-section {
+            background: linear-gradient(135deg, #fce7f3, #fbcfe8);
+            border-radius: var(--radius);
+            padding: 20px;
+            margin-top: 30px;
+        }
+        .tips-section h4 {
+            color: #9d174d;
+            margin-bottom: 12px;
+        }
+        .tips-section ul {
+            color: #831843;
+            padding-left: 20px;
+        }
+        .tips-section li {
+            margin-bottom: 8px;
+        }
+        .scene-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 12px;
+            margin-top: 8px;
+        }
+        .scene-option {
+            padding: 16px 12px;
+            border: 2px solid var(--gray-200);
+            border-radius: var(--radius);
+            cursor: pointer;
+            text-align: center;
+            transition: var(--transition);
+        }
+        .scene-option:hover,
+        .scene-option.active {
+            border-color: var(--primary);
+            background: rgba(79, 70, 229, 0.05);
+        }
+        .scene-option .icon {
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+        }
+        .scene-option .name {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--gray-800);
+            margin-bottom: 4px;
+        }
+        .scene-option .desc {
+            font-size: 0.8rem;
+            color: var(--gray-500);
+        }
+    </style>
+</head>
+<body>
+    <div class="tool-page">
+        <a href="../index.html" class="back-link">← 返回工具箱</a>
+        
+        <div class="tool-header">
+            <h1>📊 PPT大纲生成器</h1>
+            <p>输入主题，一键生成专业PPT结构大纲</p>
+        </div>
+
+        <div class="input-section">
+            <div class="input-group">
+                <label>选择使用场景</label>
+                <div class="scene-options">
+                    <div class="scene-option active" data-scene="report" onclick="selectScene(this)">
+                        <div class="icon">📈</div>
+                        <div class="name">工作汇报</div>
+                        <div class="desc">周报/月报/季度总结</div>
+                    </div>
+                    <div class="scene-option" data-scene="proposal" onclick="selectScene(this)">
+                        <div class="icon">💼</div>
+                        <div class="name">项目提案</div>
+                        <div class="desc">立项/方案/计划书</div>
+                    </div>
+                    <div class="scene-option" data-scene="product" onclick="selectScene(this)">
+                        <div class="icon">🚀</div>
+                        <div class="name">产品介绍</div>
+                        <div class="desc">新品发布/功能介绍</div>
+                    </div>
+                    <div class="scene-option" data-scene="training" onclick="selectScene(this)">
+                        <div class="icon">🎓</div>
+                        <div class="name">培训分享</div>
+                        <div class="desc">知识分享/技能培训</div>
+                    </div>
+                    <div class="scene-option" data-scene="analysis" onclick="selectScene(this)">
+                        <div class="icon">📊</div>
+                        <div class="name">数据分析</div>
+                        <div class="desc">数据报告/复盘分析</div>
+                    </div>
+                    <div class="scene-option" data-scene="pitch" onclick="selectScene(this)">
+                        <div class="icon">🎯</div>
+                        <div class="name">路演融资</div>
+                        <div class="desc">BP/投资路演</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="input-group">
+                <label for="ppt-title">PPT主题</label>
+                <input type="text" id="ppt-title" placeholder="如：Q2产品复盘与Q3规划">
+            </div>
+            
+            <div class="input-group">
+                <label for="audience">目标受众</label>
+                <input type="text" id="audience" placeholder="如：部门领导、团队成员、客户">
+            </div>
+            
+            <div class="input-group">
+                <label for="duration">预计时长</label>
+                <select id="duration">
+                    <option value="10">10分钟（简洁版）</option>
+                    <option value="20" selected>20分钟（标准版）</option>
+                    <option value="30">30分钟（详细版）</option>
+                    <option value="45">45分钟（深度版）</option>
+                </select>
+            </div>
+            
+            <div class="input-group">
+                <label for="key-points">核心要点（可选）</label>
+                <textarea id="key-points" placeholder="填写你想重点传达的内容，每行一个：&#10;- Q2用户增长30%&#10;- 推出了XX新功能&#10;- 遇到了XX挑战&#10;- Q3目标是XX"></textarea>
+            </div>
+            
+            <button class="generate-btn" onclick="generateOutline()">✨ 生成PPT大纲</button>
+        </div>
+
+        <div class="result-section" id="result-section">
+            <div class="result-header">
+                <h3>PPT大纲结构</h3>
+                <button class="copy-btn" onclick="copyResult()">📋 复制</button>
+            </div>
+            <div class="result-content" id="result-content"></div>
+        </div>
+
+        <div class="tips-section">
+            <h4>💡 PPT制作技巧</h4>
+            <ul>
+                <li><strong>一页一个观点</strong>：不要堆太多内容，观众记不住</li>
+                <li><strong>数据可视化</strong>：用图表代替大段文字</li>
+                <li><strong>故事线清晰</strong>：背景→问题→方案→结果，逻辑要顺</li>
+                <li><strong>结尾有行动</strong>：明确下一步是什么，谁来做</li>
+                <li><strong>用AI工具辅助</strong>：Gamma、美图AI PPT一键生成</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        let selectedScene = 'report';
+        
+        function selectScene(element) {
+            document.querySelectorAll('.scene-option').forEach(el => el.classList.remove('active'));
+            element.classList.add('active');
+            selectedScene = element.dataset.scene;
+        }
+        
+        function generateOutline() {
+            const title = document.getElementById('ppt-title').value || 'PPT主题';
+            const audience = document.getElementById('audience').value || '相关受众';
+            const duration = document.getElementById('duration').value;
+            const keyPoints = document.getElementById('key-points').value;
+            
+            let outline = '';
+            
+            // 根据时长确定页数
+            const pageCount = {
+                '10': '8-10页',
+                '20': '12-15页',
+                '30': '18-22页',
+                '45': '25-30页'
+            }[duration];
+            
+            outline += `═══════════════════════════════════════\n`;
+            outline += `         PPT大纲结构\n`;
+            outline += `═══════════════════════════════════════\n\n`;
+            
+            outline += `【主题】${title}\n`;
+            outline += `【受众】${audience}\n`;
+            outline += `【时长】${duration}分钟\n`;
+            outline += `【建议页数】${pageCount}\n\n`;
+            
+            // 根据场景生成不同结构
+            switch(selectedScene) {
+                case 'report':
+                    outline += `═══════════════════════════════════════\n`;
+                    outline += `第1页：封面\n`;
+                    outline += `═══════════════════════════════════════\n`;
+                    outline += `• 标题：${title}\n`;
+                    outline += `• 副标题：汇报人 + 日期\n\n`;
+                    
+                    outline += `═══════════════════════════════════════\n`;
+                    outline += `第2页：目录/议程\n`;
+                    outline += `═══════════════════════════════════════\n`;
+                    outline += `• 工作回顾\n`;
+                    outline += `• 核心数据\n`;
+                    outline += `• 问题与挑战\n`;
+                    outline += `• 下一步计划\n\n`;
+                    
+                    outline += `═══════════════════════════════════════\n`;
+                    outline += `第3-4页：工作回顾\n`;
+                    outline += `═══════════════════════════════════════\n`;
+                    outline += `• 重点工作完成情况\n`;
+                    outline += `• 关键里程碑达成\n`;
+                    outline += `• 亮点与突破\n\n`;
+                    
+                    outline += `═══════════════════════════════════════\n`;
+                    outline += `第5-6页：核心数据\n`;
+                    outline += `═══════════════════════════════════════\n`;
+                    outline += `• 关键指标展示（用图表）\n`;
+                    outline += `• 同比/环比分析\n`;
+                    outline += `• 数据背后的洞察\n\n`;
+                    
+                    outline += `═══════════════════════════════════════\n`;
+                    outline += `第7-8页：问题与挑战\n`;
+                    outline += `═══════════════════════════════════════\n`;
+                    outline += `• 遇到的主要问题\n`;
+                    outline += `• 原因分析\n`;
+                    outline += `• 已采取的应对措施\n\n`;
+                    
+                    outline += `═══════════════════════════════════════\n`;
+                    outline += `第9-10页：下一步计划\n`;
+                    outline += `═══════════════════════════════════════\n`;
+                    outline += `• 下阶段目标\n`;
+                    outline += `• 关键行动项\n`;
+                    outline += `• 需要的支持\n\n`;
+                    
+                    outline += `═══════════════════════════════════════\n`;
+                    outline += `最后1页：感谢/QA\n`;
+                    outline += `═══════════════════════════════════════\n`;
+                    outline += `• 感谢聆听\n`;
+                    outline += `• 欢迎提问\n`;
+                    outline += `• 联系方式\n`;
+                    break;
+                    
+                case 'proposal':
+                    outline += `═══════════════════════════════════════\n`;
+                    outline += `第1页：封面\n`;
+                    outline += `═══════════════════════════════════════\n`;
+                    outline += `• 项目/方案名称\n`;
+                    outline += `• 提案单位/人\n\n`;
+                    
+                    outline += `═══════════════════════════════════════\n`;
+                    outline += `第2页：背景与痛点\n`;
+                    outline += `═══════════════════════════════════════\n`;
+                    outline += `• 当前现状描述\n`;
+                    outline += `• 存在的主要问题\n`;
+                    outline += `• 不解决的后果\n\n`;
+                    
+                    outline += `═══════════════════════════════════════\n`;
+                    outline += `第3-4页：解决方案\n`;
+                    outline += `═══════════════════════════════════════\n`;
+                    outline += `• 核心思路\n`;
+                    outline += `• 方案架构/流程\n`;
+                    outline += `• 关键创新点\n\n`;
+                    
+                    outline += `═══════════════════════════════════════\n`;
+                    outline += `第5-6页：实施计划\n`;
+                    outline += `═══════════════════════════════════════\n`;
+                    outline += `• 项目阶段划分\n`;
+                    outline += `• 时间节点（甘特图）\n`;
+                    outline += `• 里程碑设定\n\n`;
+                    
+                    outline += `═══════════════════════════════════════\n`;
+                    outline += `第7页：资源需求\n`;
+                    outline += `═══════════════════════════════════════\n`;
+                    outline += `• 预算明细\n`;
+                    outline += `• 人力需求\n`;
+                    outline += `• 其他资源\n\n`;
+                    
+                    outline += `═══════════════════════════════════════\n`;
+                    outline += `第8页：预期收益\n`;
+                    outline += `═══════════════════════════════════════\n`;
+                    outline += `• 量化收益（ROI）\n`;
+                    outline += `• 战略价值\n`;
+                    outline += `• 风险评估\n\n`;
+                    
+                    outline += `═══════════════════════════════════════\n`;
+                    outline += `最后1页：呼吁行动\n`;
+                    outline += `═══════════════════════════════════════\n`;
+                    outline += `• 明确的下一步\n`;
+                    outline += `• 决策建议\n`;
+                    outline += `• 联系方式\n`;
+                    break;
+                    
+                case 'product':
+                    outline += `═══════════════════════════════════════\n`;
+                    outline += `第1页：封面\n`;
+                    outline += `═══════════════════════════════════════\n`;
+                    outline += `• 产品名称 + Slogan\n`;
+                    outline += `• 产品视觉图\n\n`;
+                    
+                    outline += `═══════════════════════════════════════\n`;
+                    outline += `第2页：用户痛点\n`;
+                    outline += `═══════════════════════════════════════\n`;
+                    outline += `• 目标用户画像\n`;
+                    outline += `• 现有解决方案的不足\n`;
+                    outline += `• 市场机会\n\n`;
+                    
+                    outline += `═══════════════════════════════════════\n`;
+                    outline += `第3-4页：产品介绍\n`;
+                    outline += `═══════════════════════════════════════\n`;
+                    outline += `• 产品定位\n`;
+                    outline += `• 核心功能（图文结合）\n`;
+                    outline += `• 产品亮点\n\n`;
+                    
+                    outline += `═══════════════════════════════════════\n`;
+                    outline += `第5页：使用场景\n`;
+                    outline += `═══════════════════════════════════════\n`;
+                    outline += `• 场景1：XXX\n`;
+                    outline += `• 场景2：XXX\n`;
+                    outline += `• 场景3：XXX\n\n`;
+                    
+                    outline += `═══════════════════════════════════════\n`;
+                    outline += `第6-7页：产品演示\n`;
+                    outline += `═══════════════════════════════════════\n`;
+                    outline += `• 界面展示\n`;
+                    outline += `• 操作流程\n`;
+                    outline += `• 效果对比（Before/After）\n\n`;
+                    
+                    outline += `═══════════════════════════════════════\n`;
+                    outline += `第8页：用户反馈\n`;
+                    outline += `═══════════════════════════════════════\n`;
+                    outline += `• 用户评价/案例\n`;
+                    outline += `• 数据证明\n\n`;
+                    
+                    outline += `═══════════════════════════════════════\n`;
+                    outline += `最后1页：行动号召\n`;
+                    outline += `═══════════════════════════════════════\n`;
+                    outline += `• 立即体验/购买\n`;
+                    outline += `• 限时优惠（如有）\n`;
+                    outline += `• 联系方式\n`;
+                    break;
+                    
+                case 'training':
+                    outline += `═══════════════════════════════════════\n`;
+                    outline += `第1页：封面\n`;
+                    outline += `═══════════════════════════════════════\n`;
+                    outline += `• 课程标题\n`;
+                    outline += `• 讲师信息\n\n`;
+                    
+                    outline += `═══════════════════════════════════════\n`;
+                    outline += `第2页：课程目标\n`;
+                    outline += `═══════════════════════════════════════\n`;
+                    outline += `• 学完能收获什么\n`;
+                    outline += `• 适合谁听\n\n`;
+                    
+                    outline += `═══════════════════════════════════════\n`;
+                    outline += `第3页：目录\n`;
+                    outline += `═══════════════════════════════════════\n`;
+                    outline += `• 模块一：XXX\n`;
+                    outline += `• 模块二：XXX\n`;
+                    outline += `• 模块三：XXX\n\n`;
+                    
+                    outline += `═══════════════════════════════════════\n`;
+                    outline += `第4-8页：正文内容\n`;
+                    outline += `═══════════════════════════════════════\n`;
+                    outline += `• 理论讲解\n`;
+                    outline += `• 案例演示\n`;
+                    outline += `• 互动环节\n\n`;
+                    
+                    outline += `═══════════════════════════════════════\n`;
+                    outline += `第9页：总结回顾\n`;
+                    outline += `═══════════════════════════════════════\n`;
+                    outline += `• 核心要点回顾\n`;
+                    outline += `• 金句/口诀\n\n`;
+                    
+                    outline += `═══════════════════════════════════════\n`;
+                    outline += `最后1页：课后行动\n`;
+                    outline += `═══════════════════════════════════════\n`;
+                    outline += `• 作业/练习\n`;
+                    outline += `• 资料下载\n`;
+                    outline += `• 答疑方式\n`;
+                    break;
+                    
+                case 'analysis':
+                    outline += `═══════════════════════════════════════\n`;
+                    outline += `第1页：封面\n`;
+                    outline += `═══════════════════════════════════════\n`;
+                    outline += `• 报告主题\n`;
+                    outline += `• 数据周期\n\n`;
+                    
+                    outline += `═══════════════════════════════════════\n`;
+                    outline += `第2页：核心结论\n`;
+                    outline += `═══════════════════════════════════════\n`;
+                    outline += `• 最重要的3个发现\n`;
+                    outline += `• 关键数据指标\n\n`;
+                    
+                    outline += `═══════════════════════════════════════\n`;
+                    outline += `第3-5页：数据详情\n`;
+                    outline += `═══════════════════════════════════════\n`;
+                    outline += `• 多维度数据分析\n`;
+                    outline += `• 趋势图表\n`;
+                    outline += `• 对比分析\n\n`;
+                    
+                    outline += `═══════════════════════════════════════\n`;
+                    outline += `第6页：原因分析\n`;
+                    outline += `═══════════════════════════════════════\n`;
+                    outline += `• 数据背后的原因\n`;
+                    outline += `• 影响因素拆解\n\n`;
+                    
+                    outline += `═══════════════════════════════════════\n`;
+                    outline += `第7页：建议与行动\n`;
+                    outline += `═══════════════════════════════════════\n`;
+                    outline += `• 基于数据的建议\n`;
+                    outline += `• 具体行动项\n`;
+                    break;
+                    
+                case 'pitch':
+                    outline += `═══════════════════════════════════════\n`;
+                    outline += `第1页：封面\n`;
+                    outline += `═══════════════════════════════════════\n`;
+                    outline += `• 项目名称\n`;
+                    outline += `• 一句话定位\n\n`;
+                    
+                    outline += `═══════════════════════════════════════\n`;
+                    outline += `第2页：痛点与机会\n`;
+                    outline += `═══════════════════════════════════════\n`;
+                    outline += `• 市场痛点\n`;
+                    outline += `• 市场规模\n`;
+                    outline += `• 增长趋势\n\n`;
+                    
+                    outline += `═══════════════════════════════════════\n`;
+                    outline += `第3页：解决方案\n`;
+                    outline += `═══════════════════════════════════════\n`;
+                    outline += `• 产品/服务介绍\n`;
+                    outline += `• 核心优势\n`;
+                    outline += `• 技术壁垒\n\n`;
+                    
+                    outline += `═══════════════════════════════════════\n`;
+                    outline += `第4页：商业模式\n`;
+                    outline += `═══════════════════════════════════════\n`;
+                    outline += `• 盈利模式\n`;
+                    outline += `• 收入来源\n`;
+                    outline += `• 成本结构\n\n`;
+                    
+                    outline += `═══════════════════════════════════════\n`;
+                    outline += `第5页：市场与竞争\n`;
+                    outline += `═══════════════════════════════════════\n`;
+                    outline += `• 目标市场\n`;
+                    outline += `• 竞争格局\n`;
+                    outline += `• 差异化优势\n\n`;
+                    
+                    outline += `═══════════════════════════════════════\n`;
+                    outline += `第6页：运营数据\n`;
+                    outline += `═══════════════════════════════════════\n`;
+                    outline += `• 关键指标\n`;
+                    outline += `• 增长曲线\n`;
+                    outline += `• 用户反馈\n\n`;
+                    
+                    outline += `═══════════════════════════════════════\n`;
+                    outline += `第7页：团队介绍\n`;
+                    outline += `═══════════════════════════════════════\n`;
+                    outline += `• 核心团队背景\n`;
+                    outline += `• 顾问/投资人\n\n`;
+                    
+                    outline += `═══════════════════════════════════════\n`;
+                    outline += `第8页：融资计划\n`;
+                    outline += `═══════════════════════════════════════\n`;
+                    outline += `• 融资金额\n`;
+                    outline += `• 资金用途\n`;
+                    outline += `• 里程碑规划\n\n`;
+                    
+                    outline += `═══════════════════════════════════════\n`;
+                    outline += `最后1页：愿景与联系\n`;
+                    outline += `═══════════════════════════════════════\n`;
+                    outline += `• 愿景/使命\n`;
+                    outline += `• 联系方式\n`;
+                    break;
+            }
+            
+            // 添加核心要点提醒
+            if (keyPoints.trim()) {
+                outline += `\n═══════════════════════════════════════\n`;
+                outline += `💡 核心要点提醒\n`;
+                outline += `═══════════════════════════════════════\n`;
+                const points = keyPoints.split('\n').filter(p => p.trim());
+                points.forEach((point, index) => {
+                    outline += `${index + 1}. ${point.replace(/^[-•]\s*/, '')}\n`;
+                });
+            }
+            
+            outline += `\n═══════════════════════════════════════\n`;
+            outline += `✅ 制作建议\n`;
+            outline += `═══════════════════════════════════════\n`;
+            outline += `• 使用 Gamma / 美图AI PPT 一键生成\n`;
+            outline += `• 每页控制在 3-5 个要点\n`;
+            outline += `• 多用图表，少用文字\n`;
+            outline += `• 提前演练，控制时间\n`;
+            
+            document.getElementById('result-content').textContent = outline;
+            document.getElementById('result-section').classList.add('show');
+            document.getElementById('result-section').scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        function copyResult() {
+            const content = document.getElementById('result-content').textContent;
+            navigator.clipboard.writeText(content).then(() => {
+                alert('已复制到剪贴板');
+            });
+        }
+    </script>
+</body>
+</html>

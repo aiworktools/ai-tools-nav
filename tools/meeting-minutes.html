@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>会议纪要模板生成 - 专业会议记录模板 | AI办公效率工具箱</title>
+    <meta name="description" content="会议纪要模板生成器，输入会议基本信息，一键生成专业、完整的会议纪要模板。支持多种会议类型，项目会议、周会、评审会都能用。">
+    <meta name="keywords" content="会议纪要模板,会议记录,会议纪要生成器,会议模板,AI办公工具">
+    <link rel="canonical" href="https://www.aitools.ren/tools/meeting-minutes.html">
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        .tool-page {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        .tool-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .tool-header h1 {
+            font-size: 2rem;
+            color: var(--gray-800);
+            margin-bottom: 12px;
+        }
+        .tool-header p {
+            color: var(--gray-600);
+            font-size: 1.1rem;
+        }
+        .input-section {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: 30px;
+            box-shadow: var(--shadow-md);
+            margin-bottom: 24px;
+        }
+        .input-group {
+            margin-bottom: 20px;
+        }
+        .input-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--gray-700);
+        }
+        .input-group input,
+        .input-group select,
+        .input-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid var(--gray-200);
+            border-radius: var(--radius);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+        .input-group input:focus,
+        .input-group select:focus,
+        .input-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        .input-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        .generate-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            border-radius: var(--radius);
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .generate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+        .result-section {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: 30px;
+            box-shadow: var(--shadow-md);
+            display: none;
+        }
+        .result-section.show {
+            display: block;
+        }
+        .result-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .result-header h3 {
+            color: var(--gray-800);
+        }
+        .copy-btn {
+            padding: 8px 16px;
+            background: var(--gray-100);
+            border: none;
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .copy-btn:hover {
+            background: var(--gray-200);
+        }
+        .result-content {
+            background: var(--gray-50);
+            padding: 20px;
+            border-radius: var(--radius);
+            white-space: pre-wrap;
+            line-height: 1.8;
+            font-family: monospace;
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary);
+            text-decoration: none;
+            margin-bottom: 20px;
+        }
+        .tips-section {
+            background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+            border-radius: var(--radius);
+            padding: 20px;
+            margin-top: 30px;
+        }
+        .tips-section h4 {
+            color: #1e40af;
+            margin-bottom: 12px;
+        }
+        .tips-section ul {
+            color: #1e3a8a;
+            padding-left: 20px;
+        }
+        .tips-section li {
+            margin-bottom: 8px;
+        }
+        .template-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 12px;
+            margin-top: 8px;
+        }
+        .template-option {
+            padding: 12px;
+            border: 2px solid var(--gray-200);
+            border-radius: var(--radius);
+            cursor: pointer;
+            text-align: center;
+            transition: var(--transition);
+        }
+        .template-option:hover,
+        .template-option.active {
+            border-color: var(--primary);
+            background: rgba(79, 70, 229, 0.05);
+        }
+        .template-option .icon {
+            font-size: 1.5rem;
+            margin-bottom: 4px;
+        }
+        .template-option .name {
+            font-size: 0.9rem;
+            color: var(--gray-700);
+        }
+    </style>
+</head>
+<body>
+    <div class="tool-page">
+        <a href="../index.html" class="back-link">← 返回工具箱</a>
+        
+        <div class="tool-header">
+            <h1>📋 会议纪要模板生成</h1>
+            <p>选择会议类型，一键生成专业会议纪要模板</p>
+        </div>
+
+        <div class="input-section">
+            <div class="input-group">
+                <label>选择会议类型</label>
+                <div class="template-options">
+                    <div class="template-option active" data-type="weekly" onclick="selectTemplate(this)">
+                        <div class="icon">📅</div>
+                        <div class="name">周会</div>
+                    </div>
+                    <div class="template-option" data-type="project" onclick="selectTemplate(this)">
+                        <div class="icon">🚀</div>
+                        <div class="name">项目会议</div>
+                    </div>
+                    <div class="template-option" data-type="review" onclick="selectTemplate(this)">
+                        <div class="icon">👀</div>
+                        <div class="name">评审会</div>
+                    </div>
+                    <div class="template-option" data-type="brainstorm" onclick="selectTemplate(this)">
+                        <div class="icon">💡</div>
+                        <div class="name">脑暴会</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="input-group">
+                <label for="meeting-title">会议主题</label>
+                <input type="text" id="meeting-title" placeholder="如：Q2产品规划讨论">
+            </div>
+            
+            <div class="input-group">
+                <label for="meeting-time">会议时间</label>
+                <input type="text" id="meeting-time" placeholder="如：2025年4月24日 14:00-15:00">
+            </div>
+            
+            <div class="input-group">
+                <label for="meeting-location">会议地点/线上链接</label>
+                <input type="text" id="meeting-location" placeholder="如：会议室A / 飞书视频会议">
+            </div>
+            
+            <div class="input-group">
+                <label for="participants">参会人员</label>
+                <input type="text" id="participants" placeholder="如：张三、李四、王五（产品部、开发部）">
+            </div>
+            
+            <div class="input-group">
+                <label for="host">主持人</label>
+                <input type="text" id="host" placeholder="如：张三">
+            </div>
+            
+            <div class="input-group">
+                <label for="recorder">记录人</label>
+                <input type="text" id="recorder" placeholder="如：李四">
+            </div>
+            
+            <button class="generate-btn" onclick="generateMinutes()">✨ 生成会议纪要模板</button>
+        </div>
+
+        <div class="result-section" id="result-section">
+            <div class="result-header">
+                <h3>会议纪要模板</h3>
+                <button class="copy-btn" onclick="copyResult()">📋 复制</button>
+            </div>
+            <div class="result-content" id="result-content"></div>
+        </div>
+
+        <div class="tips-section">
+            <h4>💡 会议纪要技巧</h4>
+            <ul>
+                <li><strong>会前准备</strong>：提前发议程，让大家有准备</li>
+                <li><strong>记录重点</strong>：记结论、记待办、记决策，不记废话</li>
+                <li><strong>会后5分钟发</strong>：趁热打铁，大家还记得清楚</li>
+                <li><strong>待办要具体</strong>：谁、什么时候、做什么，缺一不可</li>
+                <li><strong>用工具提效</strong>：飞书妙记、通义听悟自动转文字</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        let selectedType = 'weekly';
+        
+        function selectTemplate(element) {
+            document.querySelectorAll('.template-option').forEach(el => el.classList.remove('active'));
+            element.classList.add('active');
+            selectedType = element.dataset.type;
+        }
+        
+        function generateMinutes() {
+            const title = document.getElementById('meeting-title').value || '会议主题';
+            const time = document.getElementById('meeting-time').value || '会议时间';
+            const location = document.getElementById('meeting-location').value || '会议地点';
+            const participants = document.getElementById('participants').value || '参会人员';
+            const host = document.getElementById('host').value || '主持人';
+            const recorder = document.getElementById('recorder').value || '记录人';
+            
+            let template = '';
+            
+            // 通用头部
+            template += `═══════════════════════════════════════\n`;
+            template += `          会 议 纪 要\n`;
+            template += `═══════════════════════════════════════\n\n`;
+            
+            template += `【会议主题】${title}\n`;
+            template += `【会议时间】${time}\n`;
+            template += `【会议地点】${location}\n`;
+            template += `【参会人员】${participants}\n`;
+            template += `【主 持 人】${host}\n`;
+            template += `【记 录 人】${recorder}\n\n`;
+            
+            // 根据类型生成不同内容
+            switch(selectedType) {
+                case 'weekly':
+                    template += `═══════════════════════════════════════\n`;
+                    template += `一、上周工作回顾\n`;
+                    template += `═══════════════════════════════════════\n\n`;
+                    template += `1. 【已完成】\n`;
+                    template += `   - （填写上周已完成的工作）\n\n`;
+                    template += `2. 【进行中】\n`;
+                    template += `   - （填写仍在推进的工作）\n\n`;
+                    template += `3. 【遇到的问题】\n`;
+                    template += `   - （填写遇到的阻塞或风险）\n\n`;
+                    
+                    template += `═══════════════════════════════════════\n`;
+                    template += `二、本周工作计划\n`;
+                    template += `═══════════════════════════════════════\n\n`;
+                    template += `1. 【重点工作】\n`;
+                    template += `   - （填写本周核心任务）\n\n`;
+                    template += `2. 【协作需求】\n`;
+                    template += `   - （填写需要其他团队支持的事项）\n\n`;
+                    break;
+                    
+                case 'project':
+                    template += `═══════════════════════════════════════\n`;
+                    template += `一、项目进展\n`;
+                    template += `═══════════════════════════════════════\n\n`;
+                    template += `1. 【当前进度】\n`;
+                    template += `   - 整体进度：XX%\n`;
+                    template += `   - 关键里程碑：（填写完成情况）\n\n`;
+                    template += `2. 【已完成工作】\n`;
+                    template += `   - （填写本次周期完成的具体工作）\n\n`;
+                    template += `3. 【下一步计划】\n`;
+                    template += `   - （填写接下来的工作安排）\n\n`;
+                    
+                    template += `═══════════════════════════════════════\n`;
+                    template += `二、问题与风险\n`;
+                    template += `═══════════════════════════════════════\n\n`;
+                    template += `1. 【当前问题】\n`;
+                    template += `   - 问题描述：\n`;
+                    template += `   - 影响范围：\n`;
+                    template += `   - 解决方案：\n\n`;
+                    template += `2. 【潜在风险】\n`;
+                    template += `   - （填写可能的风险及应对措施）\n\n`;
+                    break;
+                    
+                case 'review':
+                    template += `═══════════════════════════════════════\n`;
+                    template += `一、评审内容\n`;
+                    template += `═══════════════════════════════════════\n\n`;
+                    template += `1. 【评审对象】\n`;
+                    template += `   - （填写评审的文档/方案/设计）\n\n`;
+                    template += `2. 【评审结论】\n`;
+                    template += `   □ 通过\n`;
+                    template += `   □ 有条件通过（需修改后再次确认）\n`;
+                    template += `   □ 不通过（需重大修改后重新评审）\n\n`;
+                    
+                    template += `═══════════════════════════════════════\n`;
+                    template += `二、评审意见\n`;
+                    template += `═══════════════════════════════════════\n\n`;
+                    template += `1. 【优点/亮点】\n`;
+                    template += `   - （填写值得肯定的地方）\n\n`;
+                    template += `2. 【修改建议】\n`;
+                    template += `   - （填写需要调整的内容）\n\n`;
+                    template += `3. 【待确认问题】\n`;
+                    template += `   - （填写需要进一步讨论的点）\n\n`;
+                    break;
+                    
+                case 'brainstorm':
+                    template += `═══════════════════════════════════════\n`;
+                    template += `一、议题背景\n`;
+                    template += `═══════════════════════════════════════\n\n`;
+                    template += `（填写本次脑暴的背景和目标）\n\n`;
+                    
+                    template += `═══════════════════════════════════════\n`;
+                    template += `二、创意点子\n`;
+                    template += `═══════════════════════════════════════\n\n`;
+                    template += `1. 【点子A】\n`;
+                    template += `   - 提出人：\n`;
+                    template += `   - 核心思路：\n`;
+                    template += `   - 可行性评估：\n\n`;
+                    template += `2. 【点子B】\n`;
+                    template += `   - 提出人：\n`;
+                    template += `   - 核心思路：\n`;
+                    template += `   - 可行性评估：\n\n`;
+                    
+                    template += `═══════════════════════════════════════\n`;
+                    template += `三、结论与下一步\n`;
+                    template += `═══════════════════════════════════════\n\n`;
+                    template += `（填写最终决策和后续行动）\n\n`;
+                    break;
+            }
+            
+            // 通用待办事项
+            template += `═══════════════════════════════════════\n`;
+            template += `三、待办事项（TODO）\n`;
+            template += `═══════════════════════════════════════\n\n`;
+            template += `| 序号 | 事项 | 负责人 | 截止时间 | 状态 |\n`;
+            template += `|------|------|--------|----------|------|\n`;
+            template += `| 1 | （填写待办事项） | | | ⬜ |\n`;
+            template += `| 2 | （填写待办事项） | | | ⬜ |\n`;
+            template += `| 3 | （填写待办事项） | | | ⬜ |\n\n`;
+            
+            template += `═══════════════════════════════════════\n`;
+            template += `四、其他备注\n`;
+            template += `═══════════════════════════════════════\n\n`;
+            template += `（填写需要补充说明的内容）\n\n`;
+            
+            template += `═══════════════════════════════════════\n`;
+            template += `纪要发送时间：____年__月__日\n`;
+            template += `═══════════════════════════════════════`;
+            
+            document.getElementById('result-content').textContent = template;
+            document.getElementById('result-section').classList.add('show');
+            document.getElementById('result-section').scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        function copyResult() {
+            const content = document.getElementById('result-content').textContent;
+            navigator.clipboard.writeText(content).then(() => {
+                alert('已复制到剪贴板');
+            });
+        }
+    </script>
+</body>
+</html>
