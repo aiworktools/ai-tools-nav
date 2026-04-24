@@ -246,10 +246,15 @@ function createToolCard(tool) {
     const ratingStars = '★'.repeat(Math.floor(tool.rating)) + (tool.rating % 1 >= 0.5 ? '½' : '');
     const priceClass = tool.price.includes('免费') ? 'price-free' : 'price-paid';
     
+    // 处理图标：图片或emoji
+    const iconHtml = tool.iconType === 'image' 
+        ? `<img src="${tool.icon}" alt="${tool.name}" onerror="this.style.display='none'; this.parentElement.textContent='🔧';">`
+        : tool.icon;
+    
     return `
         <article class="tool-card" data-id="${tool.id}" role="listitem" tabindex="0">
             <div class="tool-header">
-                <div class="tool-icon">${tool.icon}</div>
+                <div class="tool-icon">${iconHtml}</div>
                 <div class="tool-meta">
                     <span class="tool-category">${tool.categoryName}</span>
                     <span class="tool-rating" title="评分: ${tool.rating}">${ratingStars} ${tool.rating}</span>
@@ -272,9 +277,14 @@ function openModal(toolId) {
     
     const ratingStars = '★'.repeat(Math.floor(tool.rating)) + '☆'.repeat(5 - Math.floor(tool.rating));
     
+    // 处理弹窗图标
+    const modalIconHtml = tool.iconType === 'image'
+        ? `<img src="${tool.icon}" alt="${tool.name}" style="width: 64px; height: 64px; border-radius: 12px;" onerror="this.style.display='none'; this.parentElement.textContent='🔧';">`
+        : `<div style="font-size: 3rem;">${tool.icon}</div>`;
+    
     modalBody.innerHTML = `
         <div class="modal-header">
-            <div class="modal-icon">${tool.icon}</div>
+            <div class="modal-icon">${modalIconHtml}</div>
             <div class="modal-title-group">
                 <h2 id="modal-title">${tool.name}</h2>
                 <span class="modal-category">${tool.categoryName}</span>

@@ -184,10 +184,19 @@
             display: inline-block;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 4px 12px;
-            border-radius: 15px;
+            padding: 6px 16px;
+            border-radius: 20px;
             font-size: 0.85rem;
             margin-top: 8px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+        }
+
+        .tool-tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
         }
         
         .scenario-result {
@@ -248,6 +257,10 @@
             <button class="scenario-nav-btn" data-category="meeting">🎙️ 会议记录</button>
             <button class="scenario-nav-btn" data-category="data">📈 数据处理</button>
             <button class="scenario-nav-btn" data-category="comm">📧 沟通协作</button>
+            <button class="scenario-nav-btn" data-category="career">💼 求职面试</button>
+            <button class="scenario-nav-btn" data-category="design">🎨 图片设计</button>
+            <button class="scenario-nav-btn" data-category="dev">💻 代码开发</button>
+            <button class="scenario-nav-btn" data-category="video">🎬 视频创作</button>
         </div>
     </nav>
 
@@ -772,6 +785,251 @@
                     </div>
                 </div>
             </div>
+            
+            <!-- 新增场景11：简历优化与求职 -->
+            <div class="scenario-category-section" data-category="career">
+                <h2 class="category-title">💼 求职面试类</h2>
+                
+                <div class="scenario-card">
+                    <div class="scenario-header">
+                        <div class="scenario-icon">📄</div>
+                        <div class="scenario-title">
+                            <h2>2小时打造高分简历</h2>
+                            <p>从平淡无奇到HR眼前一亮</p>
+                            <div class="scenario-tags">
+                                <span class="scenario-tag">求职面试</span>
+                                <span class="scenario-tag">简历优化</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="scenario-flow">
+                        <div class="flow-step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h4>Kimi挖掘亮点</h4>
+                                <p>把现有简历和工作经历给Kimi，提示词："请帮我挖掘3-5个职业亮点，用数据和成果量化，突出与目标岗位的匹配度"</p>
+                                <span class="tool-tag">Kimi</span>
+                            </div>
+                        </div>
+                        <div class="flow-step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h4>豆包优化表达</h4>
+                                <p>让豆包改写简历文案，提示词："请把这段经历改得更专业、更有冲击力，符合互联网行业简历风格"</p>
+                                <span class="tool-tag">豆包</span>
+                            </div>
+                        </div>
+                        <div class="flow-step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h4>Canva设计排版</h4>
+                                <p>用Canva的简历模板，导入优化后的内容，选择简洁专业的版式，导出PDF</p>
+                                <span class="tool-tag">Canva可画</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="scenario-result">
+                        <h4>💡 效果</h4>
+                        <p>简历通过率从10%提升到50%，面试邀约翻倍。不是经历不够，是不会表达。</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 新增场景12：图片处理与设计 -->
+            <div class="scenario-category-section" data-category="design">
+                <h2 class="category-title">🎨 图片设计类</h2>
+                
+                <div class="scenario-card">
+                    <div class="scenario-header">
+                        <div class="scenario-icon">🖼️</div>
+                        <div class="scenario-title">
+                            <h2>3分钟搞定证件照与产品图</h2>
+                            <p>不用PS，AI一键处理</p>
+                            <div class="scenario-tags">
+                                <span class="scenario-tag">图片处理</span>
+                                <span class="scenario-tag">设计辅助</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="scenario-flow">
+                        <div class="flow-step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h4>Remove.bg抠图去背景</h4>
+                                <p>上传照片或产品图，Remove.bg自动识别主体，3秒去除背景，生成透明PNG</p>
+                                <span class="tool-tag">Remove.bg</span>
+                            </div>
+                        </div>
+                        <div class="flow-step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h4>美图AI PPT生成场景图</h4>
+                                <p>描述需要的场景，如"商务蓝底证件照背景"，AI生成高清背景图</p>
+                                <span class="tool-tag">美图AI PPT</span>
+                            </div>
+                        </div>
+                        <div class="flow-step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h4>Canva合成精修</h4>
+                                <p>在Canva中合成前景和背景，调整尺寸、亮度、对比度，添加文字或Logo</p>
+                                <span class="tool-tag">Canva可画</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="scenario-result">
+                        <h4>💡 效果</h4>
+                        <p>不用学PS，3分钟做出专业级证件照、产品白底图、社交媒体配图。</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 新增场景13：代码辅助与开发 -->
+            <div class="scenario-category-section" data-category="dev">
+                <h2 class="category-title">💻 代码开发类</h2>
+                
+                <div class="scenario-card">
+                    <div class="scenario-header">
+                        <div class="scenario-icon">⚡</div>
+                        <div class="scenario-title">
+                            <h2>非程序员也能写代码</h2>
+                            <p>AI辅助搞定简单开发和自动化</p>
+                            <div class="scenario-tags">
+                                <span class="scenario-tag">代码开发</span>
+                                <span class="scenario-tag">效率自动化</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="scenario-flow">
+                        <div class="flow-step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h4>智谱清言写代码</h4>
+                                <p>描述需求，如"写一个Python脚本，把Excel数据转换成JSON格式"，AI自动生成代码</p>
+                                <span class="tool-tag">智谱清言</span>
+                            </div>
+                        </div>
+                        <div class="flow-step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h4>小浣熊AI调试优化</h4>
+                                <p>把报错信息给小浣熊，提示词："这段代码报错了，请帮我修复并优化"</p>
+                                <span class="tool-tag">小浣熊AI</span>
+                            </div>
+                        </div>
+                        <div class="flow-step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h4>Notion AI写文档</h4>
+                                <p>用Notion AI自动生成代码说明文档，方便团队协作和后期维护</p>
+                                <span class="tool-tag">Notion AI</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="scenario-result">
+                        <h4>💡 效果</h4>
+                        <p>不会编程也能做自动化脚本、数据处理工具。开发效率提升10倍。</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 新增场景14：视频创作与剪辑 -->
+            <div class="scenario-category-section" data-category="video">
+                <h2 class="category-title">🎬 视频创作类</h2>
+                
+                <div class="scenario-card">
+                    <div class="scenario-header">
+                        <div class="scenario-icon">📹</div>
+                        <div class="scenario-title">
+                            <h2>30分钟做出短视频</h2>
+                            <p>从文案到成片，AI全流程辅助</p>
+                            <div class="scenario-tags">
+                                <span class="scenario-tag">视频剪辑</span>
+                                <span class="scenario-tag">内容创作</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="scenario-flow">
+                        <div class="flow-step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h4>豆包写视频脚本</h4>
+                                <p>给豆包主题，提示词："请写一个60秒的短视频脚本，包含开场钩子、3个要点、结尾引导关注"</p>
+                                <span class="tool-tag">豆包</span>
+                            </div>
+                        </div>
+                        <div class="flow-step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h4>剪映AI一键成片</h4>
+                                <p>把脚本复制到剪映，用"图文成片"功能，AI自动匹配素材、配音、字幕</p>
+                                <span class="tool-tag">剪映AI</span>
+                            </div>
+                        </div>
+                        <div class="flow-step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h4>美图AI PPT做封面</h4>
+                                <p>用美图AI生成视频封面图，输入"吸引眼球的短视频封面，科技风格"</p>
+                                <span class="tool-tag">美图AI PPT</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="scenario-result">
+                        <h4>💡 效果</h4>
+                        <p>从写脚本到发布，30分钟搞定一条短视频。不用学剪辑，AI帮你做。</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 新增场景15：翻译与跨语言工作 -->
+            <div class="scenario-category-section" data-category="translate">
+                <h2 class="category-title">🌐 翻译跨语言类</h2>
+                
+                <div class="scenario-card">
+                    <div class="scenario-header">
+                        <div class="scenario-icon">🌍</div>
+                        <div class="scenario-title">
+                            <h2>专业文档翻译不求人</h2>
+                            <p>从论文到合同，AI精准翻译</p>
+                            <div class="scenario-tags">
+                                <span class="scenario-tag">翻译工具</span>
+                                <span class="scenario-tag">跨语言工作</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="scenario-flow">
+                        <div class="flow-step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h4>DeepL Write翻译文档</h4>
+                                <p>把英文论文或合同分段粘贴到DeepL，选择专业领域（如医学、法律），获得精准翻译</p>
+                                <span class="tool-tag">DeepL Write</span>
+                            </div>
+                        </div>
+                        <div class="flow-step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h4>豆包润色中文表达</h4>
+                                <p>把DeepL翻译的结果给豆包，提示词："请润色这段中文，使其更符合中文表达习惯，保持专业术语准确"</p>
+                                <span class="tool-tag">豆包</span>
+                            </div>
+                        </div>
+                        <div class="flow-step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h4>WPS排版保持一致</h4>
+                                <p>用WPS打开原文档，对照翻译结果编辑，保持原有格式、图表、页眉页脚</p>
+                                <span class="tool-tag">WPS AI</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="scenario-result">
+                        <h4>💡 效果</h4>
+                        <p>专业文档翻译准确率达95%，保留原有格式，节省翻译费用和时间。</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </main>
 
@@ -834,6 +1092,86 @@
                     // 滚动到内容区
                     document.querySelector('.scenarios-content').scrollIntoView({ behavior: 'smooth' });
                 });
+            });
+        });
+    </script>
+    <script src="scenario-tools-map.js"></script>
+    <script>
+        // 自动将工具标签转换为可点击的链接
+        document.addEventListener('DOMContentLoaded', function() {
+            const toolTags = document.querySelectorAll('.tool-tag');
+            
+            toolTags.forEach(tag => {
+                const toolText = tag.textContent.trim();
+                
+                // 检查是否包含多个工具（用 / 或 、分隔）
+                const tools = toolText.split(/[/、]/).map(t => t.trim()).filter(t => t);
+                
+                // 检查是否所有工具都有URL映射
+                const hasValidTools = tools.some(toolName => {
+                    const url = getToolUrl(toolName);
+                    return url && url !== '#';
+                });
+                
+                // 如果没有有效工具URL，保持原样不转换
+                if (!hasValidTools) {
+                    return;
+                }
+                
+                if (tools.length === 1) {
+                    // 单个工具 - 直接替换为链接
+                    const toolName = tools[0];
+                    const url = getToolUrl(toolName);
+                    
+                    // 如果找不到URL，保持原样
+                    if (!url || url === '#') {
+                        return;
+                    }
+                    
+                    const link = document.createElement('a');
+                    link.className = 'tool-tag';
+                    link.href = url;
+                    link.target = '_blank';
+                    link.rel = 'noopener noreferrer';
+                    link.textContent = toolName;
+                    
+                    tag.parentNode.replaceChild(link, tag);
+                } else {
+                    // 多个工具 - 创建多个链接
+                    const container = document.createElement('span');
+                    container.style.display = 'inline-flex';
+                    container.style.gap = '8px';
+                    container.style.flexWrap = 'wrap';
+                    
+                    let hasAnyLink = false;
+                    
+                    tools.forEach((toolName) => {
+                        const url = getToolUrl(toolName);
+                        
+                        // 如果找不到URL，保持原样显示为span
+                        if (!url || url === '#') {
+                            const span = document.createElement('span');
+                            span.className = 'tool-tag';
+                            span.style.cursor = 'default';
+                            span.textContent = toolName;
+                            container.appendChild(span);
+                        } else {
+                            hasAnyLink = true;
+                            const link = document.createElement('a');
+                            link.className = 'tool-tag';
+                            link.href = url;
+                            link.target = '_blank';
+                            link.rel = 'noopener noreferrer';
+                            link.textContent = toolName;
+                            container.appendChild(link);
+                        }
+                    });
+                    
+                    // 只有至少有一个有效链接时才替换
+                    if (hasAnyLink) {
+                        tag.parentNode.replaceChild(container, tag);
+                    }
+                }
             });
         });
     </script>
