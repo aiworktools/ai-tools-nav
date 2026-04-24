@@ -248,7 +248,7 @@ function createToolCard(tool) {
     
     // 处理图标：图片或emoji
     const iconHtml = tool.iconType === 'image' 
-        ? `<img src="${tool.icon}" alt="${tool.name}" onerror="this.style.display='none'; this.parentElement.textContent='🔧';">`
+        ? `<img src="${tool.icon}" alt="${tool.name}logo" loading="lazy" onerror="this.style.display='none'; this.parentElement.textContent='🔧';">`
         : tool.icon;
     
     return `
@@ -279,7 +279,7 @@ function openModal(toolId) {
     
     // 处理弹窗图标
     const modalIconHtml = tool.iconType === 'image'
-        ? `<img src="${tool.icon}" alt="${tool.name}" style="width: 64px; height: 64px; border-radius: 12px;" onerror="this.style.display='none'; this.parentElement.textContent='🔧';">`
+        ? `<img src="${tool.icon}" alt="${tool.name} logo" style="width: 64px; height: 64px; border-radius: 12px;" loading="lazy" onerror="this.style.display='none'; this.parentElement.textContent='🔧';">`
         : `<div style="font-size: 3rem;">${tool.icon}</div>`;
     
     modalBody.innerHTML = `
