@@ -59,15 +59,31 @@
 <body>
     <!-- 头部 -->
     <header class="header">
+        <div class="header-bg">
+            <div class="floating-shape shape-1">⚡</div>
+            <div class="floating-shape shape-2">🚀</div>
+            <div class="floating-shape shape-3">💡</div>
+            <div class="floating-shape shape-4">⚙️</div>
+            <div class="floating-shape shape-5">📊</div>
+            <div class="gradient-orb orb-1"></div>
+            <div class="gradient-orb orb-2"></div>
+            <div class="gradient-orb orb-3"></div>
+        </div>
         <div class="container">
             <div class="logo-section">
                 <div class="logo-icon">
                     <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-label="AI工具箱Logo">
-                        <circle cx="50" cy="50" r="45" fill="none" stroke="white" stroke-width="3" opacity="0.9"/>
-                        <path d="M55 15 L35 45 L50 45 L45 85 L65 50 L50 50 Z" fill="white"/>
-                        <circle cx="20" cy="30" r="3" fill="white" opacity="0.6"/>
-                        <circle cx="80" cy="25" r="2" fill="white" opacity="0.5"/>
-                        <circle cx="75" cy="70" r="2.5" fill="white" opacity="0.4"/>
+                        <defs>
+                            <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#60a5fa;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#a78bfa;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <circle cx="50" cy="50" r="45" fill="none" stroke="url(#logoGrad)" stroke-width="3" opacity="0.9"/>
+                        <path d="M55 15 L35 45 L50 45 L45 85 L65 50 L50 50 Z" fill="url(#logoGrad)"/>
+                        <circle cx="20" cy="30" r="3" fill="#60a5fa" opacity="0.8"/>
+                        <circle cx="80" cy="25" r="2" fill="#a78bfa" opacity="0.7"/>
+                        <circle cx="75" cy="70" r="2.5" fill="#60a5fa" opacity="0.6"/>
                     </svg>
                 </div>
                 <div class="logo-text-group">
@@ -77,9 +93,27 @@
             </div>
             <p class="slogan">帮打工人找到真正好用的AI工具</p>
             <div class="header-features">
-                <span class="feature-tag">✅ 全部亲测</span>
-                <span class="feature-tag">🇨🇳 国内可用</span>
-                <span class="feature-tag">🎯 场景化推荐</span>
+                <div class="feature-card">
+                    <div class="feature-icon">🙋‍♂️</div>
+                    <div class="feature-text">
+                        <span class="feature-title">不是广告</span>
+                        <span class="feature-desc">每款都亲自用过</span>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🇨🇳</div>
+                    <div class="feature-text">
+                        <span class="feature-title">不用翻墙</span>
+                        <span class="feature-desc">国内直接就能用</span>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <div class="feature-text">
+                        <span class="feature-title">按场景找</span>
+                        <span class="feature-desc">写PPT、开会、做表</span>
+                    </div>
+                </div>
             </div>
         </div>
     </header>
@@ -93,37 +127,40 @@
         </div>
     </nav>
 
-    <!-- 搜索栏 -->
-    <section class="search-section">
-        <div class="container">
-            <div class="search-box">
-                <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <circle cx="11" cy="11" r="8"/>
-                    <path d="m21 21-4.35-4.35"/>
-                </svg>
-                <input type="text" id="search-input" placeholder="搜索工具名称、功能、使用场景..." aria-label="搜索工具">
-                <button id="search-clear" class="search-clear" aria-label="清除搜索">×</button>
+    <!-- 搜索和分类（合并sticky） -->
+    <div class="filter-bar">
+        <!-- 搜索栏 -->
+        <section class="search-section">
+            <div class="container">
+                <div class="search-box">
+                    <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"/>
+                        <path d="m21 21-4.35-4.35"/>
+                    </svg>
+                    <input type="text" id="search-input" placeholder="搜索工具名称、功能、使用场景..." aria-label="搜索工具">
+                    <button id="search-clear" class="search-clear" aria-label="清除搜索">×</button>
+                </div>
+                <div class="search-stats" id="search-stats"></div>
             </div>
-            <div class="search-stats" id="search-stats"></div>
-        </div>
-    </section>
+        </section>
 
-    <!-- 分类导航 -->
-    <nav class="category-nav" aria-label="分类筛选">
-        <div class="container">
-            <div class="category-scroll">
-                <button class="category-btn active" data-category="all">🔥 全部</button>
-                <button class="category-btn" data-category="meeting">🗓️ 会议日程</button>
-                <button class="category-btn" data-category="writing">✍️ 文档写作</button>
-                <button class="category-btn" data-category="ppt">📊 PPT演示</button>
-                <button class="category-btn" data-category="email">📧 邮件沟通</button>
-                <button class="category-btn" data-category="data">📈 数据处理</button>
-                <button class="category-btn" data-category="notes">📝 知识管理</button>
-                <button class="category-btn" data-category="product">🎨 产品设计</button>
-                <button class="category-btn" data-category="video">🎬 视频剪辑</button>
+        <!-- 分类导航 -->
+        <nav class="category-nav" aria-label="分类筛选">
+            <div class="container">
+                <div class="category-scroll">
+                    <button class="category-btn active" data-category="all">🔥 全部</button>
+                    <button class="category-btn" data-category="meeting">🗓️ 会议日程</button>
+                    <button class="category-btn" data-category="writing">✍️ 文档写作</button>
+                    <button class="category-btn" data-category="ppt">📊 PPT演示</button>
+                    <button class="category-btn" data-category="email">📧 邮件沟通</button>
+                    <button class="category-btn" data-category="data">📈 数据处理</button>
+                    <button class="category-btn" data-category="notes">📝 知识管理</button>
+                    <button class="category-btn" data-category="product">🎨 产品设计</button>
+                    <button class="category-btn" data-category="video">🎬 视频剪辑</button>
+                </div>
             </div>
-        </div>
-    </nav>
+        </nav>
+    </div>
 
     <!-- 主内容区 -->
     <main class="main">
@@ -161,6 +198,23 @@
             </div>
         </div>
     </div>
+
+    <!-- 联系我们 -->
+    <section class="contact-section">
+        <div class="container">
+            <div class="contact-card">
+                <h2 class="contact-title">联系我们</h2>
+                <div class="contact-divider"></div>
+                <div class="contact-content">
+                    <p class="contact-desc">若你有任何意见和建议，无论是网站排版改进、AI工具提交，还是文章投稿、观点分享和商务合作，欢迎随时联系站长。</p>
+                    <a href="mailto:aitoolswork2026@163.com" class="contact-email-btn">
+                        <span class="contact-email-icon">📧</span>
+                        <span>aitoolswork2026@163.com</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- 页脚 -->
     <footer class="footer">
