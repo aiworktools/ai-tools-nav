@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prompt工程入门：如何写出高效的AI提示词 | AI办公效率工具箱</title>
+    <meta name="description" content="Prompt工程完整指南，教你写出高效的AI提示词。包含提示词框架、常用技巧、实战案例，让AI输出质量提升10倍。">
+    <meta name="keywords" content="Prompt工程,AI提示词,Prompt技巧,提示词优化,AI对话技巧">
+    <link rel="canonical" href="https://www.aitools.ren/blog/prompt-engineering-guide.html">
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        .article-page { max-width: 800px; margin: 0 auto; padding: 40px 20px; }
+        .article-header { text-align: center; margin-bottom: 40px; padding-bottom: 30px; border-bottom: 1px solid var(--gray-200); }
+        .article-header h1 { font-size: 2rem; color: var(--gray-800); margin-bottom: 16px; line-height: 1.4; }
+        .article-meta { color: var(--gray-500); font-size: 0.9rem; }
+        .article-content { font-size: 1.05rem; line-height: 1.8; color: var(--gray-700); }
+        .article-content h2 { font-size: 1.5rem; color: var(--gray-800); margin: 40px 0 20px; padding-bottom: 10px; border-bottom: 2px solid var(--primary); }
+        .article-content h3 { font-size: 1.2rem; color: var(--gray-800); margin: 30px 0 15px; }
+        .article-content p { margin-bottom: 20px; }
+        .article-content ul, .article-content ol { margin-bottom: 20px; padding-left: 30px; }
+        .article-content li { margin-bottom: 10px; }
+        .code-block { background: var(--gray-800); color: #fff; padding: 20px; border-radius: var(--radius); font-family: monospace; font-size: 0.9rem; overflow-x: auto; margin: 20px 0; }
+        .highlight-box { background: linear-gradient(135deg, #fef3c7, #fde68a); border-radius: var(--radius-lg); padding: 24px; margin: 30px 0; }
+        .highlight-box h4 { color: #92400e; margin-bottom: 12px; }
+        .cta-box { background: linear-gradient(135deg, var(--primary), var(--secondary)); border-radius: var(--radius-lg); padding: 30px; margin: 40px 0; text-align: center; color: white; }
+        .cta-box h3 { color: white; margin-bottom: 16px; }
+        .cta-box p { color: rgba(255,255,255,0.9); margin-bottom: 20px; }
+        .cta-btn { display: inline-block; background: white; color: var(--primary); padding: 12px 28px; border-radius: var(--radius); text-decoration: none; font-weight: 600; transition: var(--transition); }
+        .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+        .back-link { display: inline-flex; align-items: center; gap: 8px; color: var(--primary); text-decoration: none; margin-bottom: 30px; font-weight: 500; }
+        .back-link:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <div class="article-page">
+        <a href="index.html" class="back-link">← 返回博客首页</a>
+        <article class="article-content">
+            <header class="article-header">
+                <h1>Prompt工程入门：如何写出高效的AI提示词</h1>
+                <div class="article-meta">发布于 2025年4月 | 阅读时间 12 分钟 | 分类：AI教程</div>
+            </header>
+
+            <p>同样的AI工具，为什么别人能得到高质量的输出，你却得到一堆废话？</p>
+            <p>答案往往是<strong>提示词（Prompt）</strong>写得不够好。今天这篇教程，教你掌握Prompt工程的核心技巧，让AI输出质量提升10倍！</p>
+
+            <h2>一、什么是Prompt工程？</h2>
+            <p>Prompt工程就是<strong>设计和优化提示词的技术</strong>，目的是让AI更准确地理解你的需求，给出更高质量的回答。</p>
+            <p>好的提示词就像给AI一份清晰的工作说明书，告诉它：你是谁、要做什么、怎么做、输出什么格式。</p>
+
+            <h2>二、Prompt的五大要素</h2>
+            <p>一个完整的Prompt应该包含以下要素：</p>
+
+            <h3>1. 角色（Role）</h3>
+            <p>让AI扮演特定角色，输出更专业。</p>
+            <div class="code-block">
+❌ 不好："写一篇关于新能源汽车的文章"
+✅ 好："你是一位资深汽车行业分析师，请写一篇关于新能源汽车市场趋势的分析文章"
+            </div>
+
+            <h3>2. 任务（Task）</h3>
+            <p>明确告诉AI要完成什么任务。</p>
+            <div class="code-block">
+❌ 不好："帮我写点东西"
+✅ 好："请撰写一份产品需求文档（PRD），描述一个在线文档协作工具的核心功能"
+            </div>
+
+            <h3>3. 背景（Context）</h3>
+            <p>提供必要的背景信息，让AI理解场景。</p>
+            <div class="code-block">
+背景信息：
+- 目标用户：25-35岁的职场白领
+- 产品定位：中高端效率工具
+- 核心痛点：团队协作效率低
+- 竞品：Notion、飞书文档
+            </div>
+
+            <h3>4. 要求（Requirements）</h3>
+            <p>明确输出要求，包括风格、长度、重点等。</p>
+            <div class="code-block">
+要求：
+- 风格：专业、简洁
+- 字数：2000字左右
+- 重点突出：核心功能和创新点
+- 包含：用户场景、功能描述、价值主张
+            </div>
+
+            <h3>5. 格式（Format）</h3>
+            <p>指定输出格式，方便后续使用。</p>
+            <div class="code-block">
+输出格式：
+1. 产品概述（200字）
+2. 核心功能（分点列出，每点包含功能名、描述、用户价值）
+3. 竞品对比表格
+4. 总结
+            </div>
+
+            <h2>三、常用Prompt技巧</h2>
+
+            <h3>技巧1：Few-Shot示例</h3>
+            <p>给AI几个示例，让它模仿风格或格式。</p>
+            <div class="code-block">
+请按照以下示例的格式，写3条产品卖点：
+
+示例1：
+痛点：团队协作效率低
+卖点：实时协作编辑，多人同时编辑同一文档，修改即时同步
+
+示例2：
+痛点：找不到历史文档
+卖点：智能搜索，支持全文检索，秒级找到任何文档
+
+现在请写：
+痛点：跨部门沟通困难
+            </div>
+
+            <h3>技巧2：Chain-of-Thought链式思考</h3>
+            <p>让AI一步步思考，适合复杂问题。</p>
+            <div class="code-block">
+请一步步分析这个问题：
+
+问题：某公司Q1销售额100万，Q2增长20%，Q3比Q2下降10%，Q4比Q3增长30%。请问全年销售额是多少？
+
+请按以下步骤回答：
+1. 计算Q2销售额
+2. 计算Q3销售额
+3. 计算Q4销售额
+4. 计算全年总销售额
+            </div>
+
+            <h3>技巧3：使用分隔符</h3>
+            <p>用分隔符区分不同部分，让AI理解更清晰。</p>
+            <div class="code-block">
+请根据以下文章内容，写一份摘要。
+
+"""
+[这里是文章内容...]
+"""
+
+要求：
+- 摘要长度：100字以内
+- 突出核心观点
+- 语言简洁
+            </div>
+
+            <h3>技巧4：设定边界条件</h3>
+            <p>告诉AI什么该做、什么不该做。</p>
+            <div class="code-block">
+请为一款健身APP写推广文案。
+
+要求：
+✅ 要包含：运动场景、用户痛点、解决方案
+✅ 语气：积极、有感染力
+❌ 不要：过度承诺效果、使用绝对化用语
+❌ 不要：提及具体药物或医疗建议
+            </div>
+
+            <h2>四、实战案例</h2>
+
+            <div class="highlight-box">
+                <h4>📧 案例1：写邮件</h4>
+                <p><strong>场景</strong>：向领导申请项目延期</p>
+                <p><strong>Prompt</strong>：</p>
+                <div class="code-block" style="font-size:0.8rem;">
+角色：你是一位资深项目经理
+任务：写一封邮件向领导申请项目延期
+背景：
+- 项目：新产品上线
+- 原定时间：6月30日
+- 延期原因：第三方接口对接延迟、测试发现关键bug
+- 新计划时间：7月15日
+- 已采取措施：增加开发人员、加班赶工
+
+要求：
+- 语气：诚恳、专业
+- 结构：说明现状→解释原因→提出方案→请求批准
+- 长度：300字左右
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <h4>📊 案例2：数据分析</h4>
+                <p><strong>场景</strong>：分析销售数据</p>
+                <p><strong>Prompt</strong>：</p>
+                <div class="code-block" style="font-size:0.8rem;">
+角色：你是一位数据分析师
+任务：分析以下销售数据并给出建议
+
+数据：
+- 1月销售额：50万
+- 2月销售额：45万
+- 3月销售额：60万
+- 4月销售额：55万
+
+要求：
+1. 计算环比增长率
+2. 分析趋势和可能原因
+3. 给出下月销售目标建议
+4. 提出3条提升销售的策略
+                </div>
+            </div>
+
+            <h2>五、常见错误</h2>
+
+            <h3>错误1：提示词太模糊</h3>
+            <p>❌ "写篇文章" → AI不知道写什么</p>
+            <p>✅ "写一篇关于远程办公效率提升的职场文章，面向25-35岁互联网从业者"</p>
+
+            <h3>错误2：一次要求太多</h3>
+            <p>❌ 一次性让AI写10个不同主题的文案</p>
+            <p>✅ 一次一个主题，分多次生成</p>
+
+            <h3>错误3：不给反馈</h3>
+            <p>AI输出不满意时，要告诉它具体问题：</p>
+            <p>❌ 直接重新生成</p>
+            <p>✅ "这段内容太长了，请精简到100字以内，保留核心观点"</p>
+
+            <h2>六、总结</h2>
+
+            <p>Prompt工程的核心是<strong>清晰、具体、结构化</strong>地表达需求。</p>
+
+            <p>记住这个万能公式：</p>
+            <div class="highlight-box">
+                <h4>🎯 万能Prompt公式</h4>
+                <p><strong>角色 + 任务 + 背景 + 要求 + 格式</strong></p>
+            </div>
+
+            <p>多练习、多迭代，你会发现AI的输出质量越来越高！</p>
+
+            <div class="cta-box">
+                <h3>💡 更多AI教程和工具</h3>
+                <p>除了Prompt技巧，还有60+款AI办公工具等你探索</p>
+                <a href="../index.html" class="cta-btn">查看全部工具 →</a>
+            </div>
+        </article>
+    </div>
+</body>
+</html>

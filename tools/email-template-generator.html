@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>邮件模板生成器 - 快速生成专业商务邮件 | AI办公效率工具箱</title>
+    <meta name="description" content="邮件模板生成器，快速生成专业、得体的商务邮件。支持会议邀请、跟进邮件、感谢信、道歉信、请假申请等8种常用邮件模板。">
+    <meta name="keywords" content="邮件模板,商务邮件,邮件生成器,AI邮件,会议邀请邮件,职场邮件">
+    <link rel="canonical" href="https://www.aitools.ren/tools/email-template-generator.html">
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        .tool-page {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        .tool-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .tool-header h1 {
+            font-size: 2rem;
+            color: var(--gray-800);
+            margin-bottom: 12px;
+        }
+        .tool-header p {
+            color: var(--gray-600);
+            font-size: 1.1rem;
+        }
+        .tool-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+        @media (max-width: 768px) {
+            .tool-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+        .input-section {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: 30px;
+            box-shadow: var(--shadow-md);
+        }
+        .output-section {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: 30px;
+            box-shadow: var(--shadow-md);
+        }
+        .input-group {
+            margin-bottom: 20px;
+        }
+        .input-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--gray-700);
+            font-size: 0.95rem;
+        }
+        .input-group input,
+        .input-group select,
+        .input-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid var(--gray-200);
+            border-radius: var(--radius);
+            font-size: 1rem;
+            transition: var(--transition);
+            font-family: inherit;
+        }
+        .input-group input:focus,
+        .input-group select:focus,
+        .input-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        .input-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        .btn-primary {
+            width: 100%;
+            padding: 14px 28px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            border-radius: var(--radius);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+        .btn-secondary {
+            width: 100%;
+            padding: 12px 24px;
+            background: var(--gray-100);
+            color: var(--gray-700);
+            border: none;
+            border-radius: var(--radius);
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 12px;
+        }
+        .btn-secondary:hover {
+            background: var(--gray-200);
+        }
+        .output-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--gray-800);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .output-box {
+            background: var(--gray-50);
+            border: 1px solid var(--gray-200);
+            border-radius: var(--radius);
+            padding: 20px;
+            min-height: 400px;
+            white-space: pre-wrap;
+            font-size: 0.95rem;
+            line-height: 1.8;
+            color: var(--gray-700);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary);
+            text-decoration: none;
+            margin-bottom: 30px;
+            font-weight: 500;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="tool-page">
+        <a href="index.html" class="back-link">← 返回AI效率工具</a>
+        
+        <div class="tool-header">
+            <h1>📧 邮件模板生成器</h1>
+            <p>快速生成专业、得体的商务邮件</p>
+        </div>
+
+        <div class="tool-layout">
+            <div class="input-section">
+                <div class="input-group">
+                    <label>邮件类型</label>
+                    <select id="emailType">
+                        <option value="meeting">会议邀请</option>
+                        <option value="followup">跟进邮件</option>
+                        <option value="thankyou">感谢邮件</option>
+                        <option value="apology">道歉邮件</option>
+                        <option value="request">请求协助</option>
+                        <option value="notice">通知公告</option>
+                        <option value="leave">请假申请</option>
+                        <option value="resignation">辞职信</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label>收件人称呼</label>
+                    <input type="text" id="recipient" placeholder="例如：张经理、李总、王团队">
+                </div>
+                <div class="input-group">
+                    <label>邮件主题/核心内容</label>
+                    <input type="text" id="subject" placeholder="例如：项目进度汇报、下周会议安排">
+                </div>
+                <div class="input-group">
+                    <label>详细内容（可选）</label>
+                    <textarea id="details" placeholder="补充具体信息、背景或要求..."></textarea>
+                </div>
+                <div class="input-group">
+                    <label>发件人署名</label>
+                    <input type="text" id="sender" placeholder="您的姓名">
+                </div>
+                <button class="btn-primary" onclick="generateEmail()">生成邮件</button>
+                <button class="btn-secondary" onclick="copyEmail()">复制内容</button>
+            </div>
+
+            <div class="output-section">
+                <div class="output-title">📋 生成结果</div>
+                <div class="output-box" id="output">点击"生成邮件"按钮，邮件内容将显示在这里...</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Baidu Analytics -->
+    <script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?2db8f7ef4117f63695c6c9f3c69e8004";
+        var s = document.getElementsByTagName("script")[0]; 
+        s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
+
+    <script>
+        const templates = {
+            meeting: (data) => `主题：${data.subject} - 会议邀请
+
+尊敬的${data.recipient}：
+
+您好！
+
+${data.details || '诚邀您参加即将举行的会议，具体安排如下：'}
+
+会议时间：【请填写具体时间】
+会议地点：【请填写地点/线上会议链接】
+会议议程：
+1. 【议程一】
+2. 【议程二】
+3. 【议程三】
+
+请您确认是否能够参加，如有任何问题请随时与我联系。
+
+期待您的回复！
+
+此致
+敬礼
+
+${data.sender}
+${new Date().toLocaleDateString('zh-CN')}`,
+
+            followup: (data) => `主题：${data.subject} - 跟进
+
+尊敬的${data.recipient}：
+
+您好！
+
+${data.details || '关于之前讨论的事项，我想跟进一下最新进展。'}
+
+想了解一下目前的情况如何？是否有需要我协助的地方？
+
+期待您的反馈，谢谢！
+
+此致
+敬礼
+
+${data.sender}
+${new Date().toLocaleDateString('zh-CN')}`,
+
+            thankyou: (data) => `主题：感谢信 - ${data.subject}
+
+尊敬的${data.recipient}：
+
+您好！
+
+${data.details || '衷心感谢您在此事上给予的支持与帮助。'}
+
+您的专业指导和耐心协助让我受益匪浅，再次表示诚挚的谢意！
+
+如有任何需要我协助的地方，请随时告知。
+
+此致
+敬礼
+
+${data.sender}
+${new Date().toLocaleDateString('zh-CN')}`,
+
+            apology: (data) => `主题：致歉信 - ${data.subject}
+
+尊敬的${data.recipient}：
+
+您好！
+
+${data.details || '对于此次给您带来的不便，我深表歉意。'}
+
+事情发生后，我已经认真反思并采取了以下改进措施：
+1. 【改进措施一】
+2. 【改进措施二】
+
+再次为此次事件向您道歉，恳请您的谅解。我会以此为鉴，避免类似情况再次发生。
+
+此致
+敬礼
+
+${data.sender}
+${new Date().toLocaleDateString('zh-CN')}`,
+
+            request: (data) => `主题：请求协助 - ${data.subject}
+
+尊敬的${data.recipient}：
+
+您好！
+
+${data.details || '冒昧打扰，想请您协助处理以下事项：'}
+
+【具体请求内容】
+
+这项协助对我的工作非常重要，如果您能抽空帮忙，我将不胜感激。
+
+期待您的回复，谢谢！
+
+此致
+敬礼
+
+${data.sender}
+${new Date().toLocaleDateString('zh-CN')}`,
+
+            notice: (data) => `主题：【通知】${data.subject}
+
+各位同事：
+
+${data.details || '现将有关事项通知如下：'}
+
+一、通知内容
+【具体内容】
+
+二、注意事项
+1. 【注意点一】
+2. 【注意点二】
+
+三、联系方式
+如有疑问，请联系：${data.sender}
+
+请大家知悉并相互转告，谢谢配合！
+
+${data.sender}
+${new Date().toLocaleDateString('zh-CN')}`,
+
+            leave: (data) => `主题：请假申请 - ${data.subject}
+
+尊敬的${data.recipient}：
+
+您好！
+
+${data.details || '因个人原因，我需要申请休假，具体安排如下：'}
+
+请假时间：从【开始日期】至【结束日期】，共计【X】天
+请假类型：【事假/病假/年假/其他】
+
+工作交接：
+- 紧急事务联系人：【同事姓名】
+- 已交接事项：【具体事项】
+
+恳请批准，谢谢！
+
+此致
+敬礼
+
+申请人：${data.sender}
+${new Date().toLocaleDateString('zh-CN')}`,
+
+            resignation: (data) => `主题：辞职信
+
+尊敬的${data.recipient}：
+
+您好！
+
+${data.details || '经过慎重考虑，我决定辞去现职。'}
+
+根据劳动合同规定，我将提前30天提出辞职申请，预计最后工作日为【日期】。
+
+在离职前，我会认真做好工作交接，确保各项事务平稳过渡。
+
+感谢公司一直以来对我的培养和信任，祝愿公司发展越来越好！
+
+此致
+敬礼
+
+${data.sender}
+${new Date().toLocaleDateString('zh-CN')}`
+        };
+
+        function generateEmail() {
+            const type = document.getElementById('emailType').value;
+            const recipient = document.getElementById('recipient').value || '【收件人】';
+            const subject = document.getElementById('subject').value || '【主题】';
+            const details = document.getElementById('details').value;
+            const sender = document.getElementById('sender').value || '【您的姓名】';
+
+            const data = { recipient, subject, details, sender };
+            const email = templates[type](data);
+            
+            document.getElementById('output').textContent = email;
+        }
+
+        function copyEmail() {
+            const output = document.getElementById('output').textContent;
+            if (output === '点击"生成邮件"按钮，邮件内容将显示在这里...') {
+                alert('请先生成邮件内容');
+                return;
+            }
+            navigator.clipboard.writeText(output).then(() => {
+                alert('邮件内容已复制到剪贴板！');
+            }).catch(() => {
+                alert('复制失败，请手动复制');
+            });
+        }
+    </script>
+</body>
+</html>

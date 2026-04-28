@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文章博客 - AI办公效率工具箱</title>
+    <meta name="description" content="AI工具推荐、使用教程、行业资讯，帮你更好地使用AI提升办公效率。">
+    <meta name="keywords" content="AI工具教程,AI办公技巧,AI新闻,效率提升">
+    <link rel="canonical" href="https://www.aitools.ren/blog/">
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        .blog-page {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 20px 40px;
+        }
+        .blog-nav {
+            background: linear-gradient(135deg, var(--gray-800), var(--gray-900));
+            padding: 16px 0;
+            margin: -20px -20px 30px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .blog-nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+        .blog-nav-logo {
+            color: white;
+            font-weight: 700;
+            font-size: 1.1rem;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .blog-nav-links {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .blog-nav-link {
+            color: var(--gray-400);
+            text-decoration: none;
+            padding: 8px 14px;
+            border-radius: var(--radius);
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .blog-nav-link:hover,
+        .blog-nav-link.active {
+            color: white;
+            background: rgba(255,255,255,0.1);
+        }
+        .blog-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px 0;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: var(--radius-lg);
+            color: white;
+            margin-left: -20px;
+            margin-right: -20px;
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+        .blog-header h1 {
+            font-size: 2rem;
+            margin-bottom: 8px;
+        }
+        .blog-header p {
+            opacity: 0.9;
+            font-size: 1rem;
+        }
+        .blog-categories {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 40px;
+        }
+        .blog-category-btn {
+            padding: 12px 24px;
+            border-radius: var(--radius);
+            border: 2px solid var(--gray-200);
+            background: white;
+            color: var(--gray-600);
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 0.95rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .blog-category-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
+        .blog-category-btn.active {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-color: transparent;
+            color: white;
+            box-shadow: var(--shadow-md);
+        }
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 24px;
+        }
+        .blog-card {
+            background: white;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+        }
+        .blog-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-xl);
+        }
+        .blog-card-image {
+            height: 180px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+        .blog-card-content {
+            padding: 24px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .blog-card-category {
+            display: inline-block;
+            background: var(--gray-100);
+            color: var(--gray-600);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-bottom: 12px;
+            width: fit-content;
+        }
+        .blog-card-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--gray-800);
+            margin-bottom: 12px;
+            line-height: 1.4;
+        }
+        .blog-card-desc {
+            color: var(--gray-600);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            flex-grow: 1;
+        }
+        .blog-card-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid var(--gray-100);
+            font-size: 0.85rem;
+            color: var(--gray-500);
+        }
+        @media (max-width: 768px) {
+            .blog-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="blog-page">
+        <!-- 博客二级导航 -->
+        <nav class="blog-nav">
+            <div class="blog-nav-container">
+                <a href="../index.html" class="blog-nav-logo">🦞 AI工具箱</a>
+                <div class="blog-nav-links">
+                    <a href="index.html" class="blog-nav-link active">📚 全部</a>
+                    <a href="index.html?category=tools" class="blog-nav-link">🛠️ 工具推荐</a>
+                    <a href="index.html?category=tutorial" class="blog-nav-link">📖 AI教程</a>
+                    <a href="index.html?category=news" class="blog-nav-link">📰 AI快讯</a>
+                    <a href="index.html?category=wiki" class="blog-nav-link">📋 AI百科</a>
+                    <a href="index.html?category=cases" class="blog-nav-link">💼 AI项目</a>
+                </div>
+            </div>
+        </nav>
+        
+        <div class="blog-header">
+            <h1>📝 文章博客</h1>
+            <p>AI工具推荐、使用教程、行业资讯，帮你更好地使用AI提升办公效率</p>
+        </div>
+
+        <div class="blog-categories" style="display:none;">
+            <button class="blog-category-btn active" data-category="all">📚 全部文章</button>
+            <button class="blog-category-btn" data-category="tools">🛠️ 工具推荐</button>
+            <button class="blog-category-btn" data-category="tutorial">📖 AI教程</button>
+            <button class="blog-category-btn" data-category="news">📰 AI快讯</button>
+            <button class="blog-category-btn" data-category="wiki">📋 AI百科</button>
+            <button class="blog-category-btn" data-category="cases">💼 AI项目</button>
+        </div>
+
+        <div class="blog-grid" id="blog-grid">
+            <!-- 文章卡片 -->
+            <a href="ai-write-weekly-report.html" class="blog-card" data-category="tools">
+                <div class="blog-card-image">📝</div>
+                <div class="blog-card-content">
+                    <span class="blog-card-category">工具推荐</span>
+                    <h3 class="blog-card-title">AI写周报神器推荐：5分钟搞定一周工作总结</h3>
+                    <p class="blog-card-desc">推荐5款AI写周报工具，帮你5分钟生成专业周报。包含飞书妙记、Kimi、WPS AI等亲测好用的工具，附使用技巧和模板。</p>
+                    <div class="blog-card-meta">
+                        <span>2025-04-28</span>
+                        <span>8分钟阅读</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="meeting-minutes-tools.html" class="blog-card" data-category="tools">
+                <div class="blog-card-image">📋</div>
+                <div class="blog-card-content">
+                    <span class="blog-card-category">工具推荐</span>
+                    <h3 class="blog-card-title">会议纪要工具推荐：自动转文字，1小时会议5分钟出纪要</h3>
+                    <p class="blog-card-desc">推荐4款AI会议纪要工具，自动录音转文字，提取重点和待办。飞书妙记、讯飞听见、Otter.ai等亲测对比。</p>
+                    <div class="blog-card-meta">
+                        <span>2025-04-28</span>
+                        <span>10分钟阅读</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="ai-ppt-tools.html" class="blog-card" data-category="tools">
+                <div class="blog-card-image">📊</div>
+                <div class="blog-card-content">
+                    <span class="blog-card-category">工具推荐</span>
+                    <h3 class="blog-card-title">AI做PPT工具推荐：输入主题自动生成完整PPT</h3>
+                    <p class="blog-card-desc">推荐5款AI做PPT工具，输入主题自动生成PPT大纲和内容。Gamma、美图AI PPT、WPS AI等亲测对比。</p>
+                    <div class="blog-card-meta">
+                        <span>2025-04-28</span>
+                        <span>8分钟阅读</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="ai-excel-tools.html" class="blog-card" data-category="tools">
+                <div class="blog-card-image">📈</div>
+                <div class="blog-card-content">
+                    <span class="blog-card-category">工具推荐</span>
+                    <h3 class="blog-card-title">AI Excel工具推荐：数据处理、公式生成、自动分析</h3>
+                    <p class="blog-card-desc">推荐4款AI Excel工具，自动生成公式、数据分析、图表制作。ChatExcel、WPS AI、酷表ChatExcel等亲测对比。</p>
+                    <div class="blog-card-meta">
+                        <span>2025-04-28</span>
+                        <span>8分钟阅读</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="ai-writing-tools.html" class="blog-card" data-category="tools">
+                <div class="blog-card-image">✍️</div>
+                <div class="blog-card-content">
+                    <span class="blog-card-category">工具推荐</span>
+                    <h3 class="blog-card-title">AI写作工具推荐：文案、报告、论文一键生成</h3>
+                    <p class="blog-card-desc">推荐5款AI写作工具，帮你快速生成文案、工作报告、论文大纲。Kimi、文心一言、通义千问等亲测对比。</p>
+                    <div class="blog-card-meta">
+                        <span>2025-04-28</span>
+                        <span>9分钟阅读</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="prompt-engineering-guide.html" class="blog-card" data-category="tutorial">
+                <div class="blog-card-image">🎯</div>
+                <div class="blog-card-content">
+                    <span class="blog-card-category">AI教程</span>
+                    <h3 class="blog-card-title">Prompt工程入门：如何写出高效的AI提示词</h3>
+                    <p class="blog-card-desc">Prompt工程完整指南，教你写出高效的AI提示词。包含提示词框架、常用技巧、实战案例，让AI输出质量提升10倍。</p>
+                    <div class="blog-card-meta">
+                        <span>2025-04-28</span>
+                        <span>12分钟阅读</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="ai-productivity-workflow.html" class="blog-card" data-category="tutorial">
+                <div class="blog-card-image">⚡</div>
+                <div class="blog-card-content">
+                    <span class="blog-card-category">AI教程</span>
+                    <h3 class="blog-card-title">AI办公工作流：如何用AI提升10倍工作效率</h3>
+                    <p class="blog-card-desc">完整的AI办公工作流指南，从会议记录到报告输出，教你如何用AI工具串联整个工作流程，效率提升10倍。</p>
+                    <div class="blog-card-meta">
+                        <span>2025-04-28</span>
+                        <span>10分钟阅读</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="ai-news-2025-04.html" class="blog-card" data-category="news">
+                <div class="blog-card-image">📰</div>
+                <div class="blog-card-content">
+                    <span class="blog-card-category">AI快讯</span>
+                    <h3 class="blog-card-title">AI行业快讯：2025年4月AI工具重大更新</h3>
+                    <p class="blog-card-desc">2025年4月AI行业最新动态：GPT-5发布、国产大模型突破、AI办公工具新功能。了解AI发展趋势，把握效率提升先机。</p>
+                    <div class="blog-card-meta">
+                        <span>2025-04-28</span>
+                        <span>6分钟阅读</span>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <!-- Baidu Analytics -->
+    <script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?2db8f7ef4117f63695c6c9f3c69e8004";
+        var s = document.getElementsByTagName("script")[0]; 
+        s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
+
+    <script>
+        // 分类筛选函数
+        function filterArticles(category) {
+            // 更新文章显示
+            document.querySelectorAll('.blog-card').forEach(card => {
+                if (category === 'all' || card.dataset.category === category) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+            
+            // 更新顶部导航激活状态
+            document.querySelectorAll('.blog-nav-link').forEach(link => {
+                link.classList.remove('active');
+                const linkCategory = new URL(link.href).searchParams.get('category') || 'all';
+                if (linkCategory === category) {
+                    link.classList.add('active');
+                }
+            });
+            
+            // 更新隐藏的分类按钮状态（如果有）
+            document.querySelectorAll('.blog-category-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.category === category) {
+                    btn.classList.add('active');
+                }
+            });
+        }
+
+        // 处理顶部导航链接点击
+        document.querySelectorAll('.blog-nav-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                const url = new URL(link.href);
+                const category = url.searchParams.get('category') || 'all';
+                
+                // 如果是当前页面，阻止跳转并执行筛选
+                if (url.pathname === window.location.pathname) {
+                    e.preventDefault();
+                    filterArticles(category);
+                    // 更新URL但不跳转
+                    window.history.pushState({}, '', link.href);
+                }
+            });
+        });
+
+        // 页面加载时检查URL参数
+        window.addEventListener('load', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const category = urlParams.get('category') || 'all';
+            filterArticles(category);
+        });
+
+        // 浏览器前进后退时更新筛选
+        window.addEventListener('popstate', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const category = urlParams.get('category') || 'all';
+            filterArticles(category);
+        });
+    </script>
+</body>
+</html>
